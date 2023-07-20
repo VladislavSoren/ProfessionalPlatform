@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  My projects Index
+{% endblock %}
+
+
+{% block nav %}
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+
+    <div class="list-group mx-2 my-2">
+      <a class="list-group-item list-group-item-action list-group-item-primary"
+         href="{% url 'main_index' %}">
+      ProPlat
+      </a>
+      {% if user.is_authenticated %}
+        <a class="list-group-item list-group-item-action list-group-item-success"
+           href="{% url 'auth_block:about-me' %}">
+          User: {{ user.username }}
+        </a>
+        <a class="list-group-item list-group-item-action list-group-item-warning"
+           href="{% url 'auth_block:logout' %}">
+          Logout
+        </a>
+      {% else %}
+        <a class="list-group-item list-group-item-action list-group-item-success"
+           href="{% url 'auth_block:login' %}">
+          Login
+        </a>
+      {% endif %}
+    </div>
+
+  </nav>
+{% endblock %}
+
+
+{% block body %}
+
+  <div>
+    <p class="h3 my-3">Sections:</p>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'my_projects:sex_age_detection' %}">Sex-age humans detection</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+

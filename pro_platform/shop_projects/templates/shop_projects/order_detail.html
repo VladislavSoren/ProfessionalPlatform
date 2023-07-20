@@ -1,0 +1,50 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+  {{ class_name_plural }} #{{ object.pk }}
+{% endblock %}
+
+{% block body %}
+
+
+      {% for object, aggr_proj_sum in query_list %}
+
+        <div class="my-3">
+            <h1>{{ class_name }} #{{ object.pk }} detail:</h1>
+            Customer: <strong>{{ object.user }}</strong>
+        </div>
+
+        <h3>Projects:</h3>
+        <ul>
+          {% for project in object.projects.all %}
+            <li>{{ project.name }} - ${{ project.price }}</li>
+          {% endfor %}
+        </ul>
+
+        <h3 class="text-primary">
+            Total sum: ${{ aggr_proj_sum.projects__price__sum }}
+        </h3>
+
+      {% endfor %}
+
+    <div class="my-2">
+      <a class="btn btn-success"
+         href="{% url 'shop_projects:update-order' pk=pk %}">
+          Update</a>
+
+        {% if perms.shop_projects.delete_order %}
+        <a class="btn btn-warning"
+           href="{% url 'shop_projects:confirm-delete-order' pk=pk %}">
+           Archive</a>
+
+        {% endif %}
+    </div>
+
+  <div>
+    <a class="btn btn-secondary"
+       href="{% url back_url_to_all_objs %}">
+       To all {{ class_name_plural }}</a>
+  </div>
+{% endblock %}
+
+

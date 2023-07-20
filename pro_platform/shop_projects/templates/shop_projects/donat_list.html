@@ -1,0 +1,29 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+    {{ class_name_plural }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ class_name_plural }}:</h1>
+    <div>
+        <ul>
+            {% for object in object_list %}
+                <li><a
+                    href="{% url 'shop_projects:donat-details' pk=object.pk %}">
+                    {{ object.user }}: <i>${{ object.money }}</i></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a class="btn btn-primary my-2"
+       href="{% url 'shop_projects:create-donat' %}">
+       Create new {{ class_name }}</a>
+
+    <div>
+        {% include 'macros/back_to_index.html' %}
+    </div>
+{% endblock %}
+
+
+

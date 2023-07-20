@@ -1,0 +1,31 @@
+[
+  {
+    "model": "shop_projects.order",
+    "pk": 1,
+    "fields": {
+      "status": 1,
+      "user": 1,
+      "promocode": "325",
+      "created_at": "2023-07-17T08:42:49.240Z",
+      "updated_at": "2023-07-17T08:42:49.240Z",
+      "projects": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "shop_projects.order",
+    "pk": 2,
+    "fields": {
+      "status": 1,
+      "user": 2,
+      "promocode": "522",
+      "created_at": "2023-07-17T08:43:13.151Z",
+      "updated_at": "2023-07-17T08:43:13.151Z",
+      "projects": [
+        2,
+        3
+      ]
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "model": "shop_projects.orderpaymentdetails",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "payed_at": null,
+      "card_ends_with": "",
+      "status": 0
+    }
+  },
+  {
+    "model": "shop_projects.orderpaymentdetails",
+    "pk": 2,
+    "fields": {
+      "order": 2,
+      "payed_at": null,
+      "card_ends_with": "",
+      "status": 0
+    }
+  }
+]

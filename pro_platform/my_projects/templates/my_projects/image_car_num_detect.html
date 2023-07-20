@@ -1,0 +1,28 @@
+{% extends 'my_projects/index.html' %}
+
+{% block title %}
+Image loading
+{% endblock %}
+
+{% block body %}
+<div class="my-3">
+<h2>Car numbers detection</h2>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+
+<h3>Detected number: {{ detected_number }}</h3>
+
+{% if image_object %}
+<img src="{{ path_tagged_image }}" alt="connect" style="max-height:300px" width="400">
+
+{% endif %}
+
+{% endblock %}
+
+
+

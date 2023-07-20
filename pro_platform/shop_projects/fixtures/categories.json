@@ -1,0 +1,29 @@
+[
+  {
+    "model": "shop_projects.category",
+    "pk": 1,
+    "fields": {
+      "status": 1,
+      "name": "default",
+      "description": "default category"
+    }
+  },
+  {
+    "model": "shop_projects.category",
+    "pk": 2,
+    "fields": {
+      "status": 1,
+      "name": "ML",
+      "description": "ML services"
+    }
+  },
+  {
+    "model": "shop_projects.category",
+    "pk": 3,
+    "fields": {
+      "status": 1,
+      "name": "Bots",
+      "description": "Bots services"
+    }
+  }
+]

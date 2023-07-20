@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  My projects Index
+{% endblock %}
+
+
+{% block nav %}
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+
+    <div class="list-group mx-2 my-2">
+      <a class="list-group-item list-group-item-action list-group-item-primary"
+         href="{% url 'main_index' %}">
+      ProPlat
+      </a>
+      {% if user.is_authenticated %}
+        <a class="list-group-item list-group-item-action list-group-item-success"
+           href="{% url 'auth_block:about-me' %}">
+          User: {{ user.username }}
+        </a>
+        <a class="list-group-item list-group-item-action list-group-item-warning"
+           href="{% url 'auth_block:logout' %}">
+          Logout
+        </a>
+      {% else %}
+        <a class="list-group-item list-group-item-action list-group-item-success"
+           href="{% url 'auth_block:login' %}">
+          Login
+        </a>
+      {% endif %}
+    </div>
+
+<!--Projects navbar-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+
+<!--Sex-age human detection-->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"
+           id="navbarDropdown0"
+           role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Sex-age human detection
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'my_projects:sex_age_detection' %}">Try</a>
+            <a class="dropdown-item" href="{% url 'my_projects:sex_age_detection' %}">About</a>
+          </div>
+        </li>
+<!--Car num detection-->
+
+
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"
+           id="navbarDropdown01"
+           role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Car num detection
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'my_projects:car_num_detection' %}">Try</a>
+            <a class="dropdown-item" href="{% url 'my_projects:car_num_detection' %}">About</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+
+{% block body %}
+
+  <div>
+    <p class="h3 my-3">Sections:</p>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'my_projects:sex_age_detection' %}">Sex-age humans detection</a>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'my_projects:sex_age_detection' %}">Car numbers detection</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+

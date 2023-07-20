@@ -1,0 +1,25 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+  Archive {{ class_name }} #{{ object.pk }}
+{% endblock %}
+
+{% block body %}
+  <h1>Archive <code>{{ object.name }}</code></h1>
+  <div class="alert alert-danger">
+    Are you sure you want to archive {{ class_name }} #{{ object.pk }}
+    with name <code>{{ object.name }}</code>?
+  </div>
+
+  <form class="my-2" method="post">
+    {% csrf_token %}
+    <input class="btn btn-warning" type="submit" value="Archive">
+  </form>
+
+
+  <div>
+    <a class="btn btn-sm btn-info"
+       href="{% url 'shop_projects:category-details' pk=object.pk %}">
+        Back to {{ class_name }} details</a>
+  </div>
+{% endblock %}

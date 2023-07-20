@@ -1,0 +1,37 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+    {{ class_name_plural }}
+{% endblock %}
+
+{% block body %}
+<h1>{{ class_name_plural }}:</h1>
+<div>
+    <ul>
+
+        {% for object,projs_sum  in query_list %}
+            <li><a
+                href="{% url 'shop_projects:order-details' pk=object.pk %}">
+                #{{ object.id }} by {{ object.user }}</a>
+                (Total sum: <i>${{ projs_sum.projects__price__sum }}</i>)
+            </li>
+        {% if forloop.last %}
+        <div class="my-2">
+            Total orders: {{ forloop.counter }}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+<a class="btn btn-primary my-2"
+   href="{% url 'shop_projects:create-order' %}">
+   Create new {{ class_name }}</a>
+
+<div>
+    {% include 'macros/back_to_index.html' %}
+</div>
+{% endblock %}
+
+
+

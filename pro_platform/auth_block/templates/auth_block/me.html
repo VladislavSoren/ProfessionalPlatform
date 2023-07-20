@@ -1,0 +1,15 @@
+{% extends 'auth_block/index.html' %}
+
+{% block title %}
+  About me
+{% endblock %}
+
+{% block body %}
+  <h1>User info</h1>
+  {% if user.is_authenticated %}
+    <p>Username: {{ user.username }}</p>
+  {% else %}
+    <h3>Anonymous user</h3>
+  {% endif %}
+
+{% endblock %}

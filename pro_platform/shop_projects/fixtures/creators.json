@@ -1,0 +1,20 @@
+[
+  {
+    "model": "shop_projects.creator",
+    "pk": 1,
+    "fields": {
+      "status": 1,
+      "user": 1,
+      "rating": 4
+    }
+  },
+  {
+    "model": "shop_projects.creator",
+    "pk": 2,
+    "fields": {
+      "status": 1,
+      "user": 2,
+      "rating": 5
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "model": "shop_projects.project",
+    "pk": 2,
+    "fields": {
+      "status": 1,
+      "name": "Exercise recognition",
+      "price": "300.00",
+      "description": "Exercise recognition services",
+      "category": 2,
+      "creator": 1,
+      "url": "ExerciseRecognition.ru",
+      "other_contributors": "No",
+      "created_at": "2023-07-17T08:37:58.933Z",
+      "updated_at": "2023-07-17T08:37:58.933Z"
+    }
+  },
+  {
+    "model": "shop_projects.project",
+    "pk": 3,
+    "fields": {
+      "status": 1,
+      "name": "Sex-age humans detection",
+      "price": "200.00",
+      "description": "Sex age humans detection service",
+      "category": 2,
+      "creator": 1,
+      "url": "Sex-ageHumansHetection.ru",
+      "other_contributors": "No",
+      "created_at": "2023-07-17T08:39:37.834Z",
+      "updated_at": "2023-07-17T08:39:37.834Z"
+    }
+  },
+  {
+    "model": "shop_projects.project",
+    "pk": 4,
+    "fields": {
+      "status": 1,
+      "name": "Koncert bot",
+      "price": "100.00",
+      "description": "Koncert bot service",
+      "category": 3,
+      "creator": 2,
+      "url": "https://t.me/koncert_calendar_bot",
+      "other_contributors": "No",
+      "created_at": "2023-07-17T08:40:43.893Z",
+      "updated_at": "2023-07-17T08:40:43.893Z"
+    }
+  }
+]

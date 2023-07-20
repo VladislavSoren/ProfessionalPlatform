@@ -1,0 +1,15 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+  Create {{ class_name }}
+{% endblock %}
+
+{% block body %}
+    <h1>Create a new {{ class_name }}:</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input class="btn btn-primary" type="submit" value="Create">
+    </form>
+{% endblock %}

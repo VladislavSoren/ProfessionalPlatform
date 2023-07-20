@@ -1,0 +1,21 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+  Update {{ class_name }} #{{ object.pk }}
+{% endblock %}
+
+{% block body %}
+  <h2>Update {{ class_name }} #{{ object.pk }} with name <code>{{ object.name }}</code></h2>
+  <form class="my-3" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input class="btn btn-primary" type="submit" value="Update">
+  </form>
+
+  <div>
+    <a class="btn btn-sm btn-info"
+       href="{% url 'shop_projects:donat-details' pk=object.pk %}">
+      Back to {{ class_name }} details</a>
+  </div>
+{% endblock %}

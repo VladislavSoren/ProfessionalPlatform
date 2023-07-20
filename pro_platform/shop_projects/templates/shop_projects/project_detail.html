@@ -1,0 +1,42 @@
+{% extends 'shop_projects/index.html' %}
+
+{% block title %}
+  {{ class_name_plural }} #{{ object.pk }}
+{% endblock %}
+
+{% block body %}
+    <div class="my-3">
+        <h1>{{ class_name }} #{{ object.pk }} detail:</h1>
+        <h2><code>{{ object.name }}</code></h2>
+        Creator: <strong>{{ object.creator }}</strong>
+        <br>
+        Price: <i>${{ object.price }}</i>
+    </div>
+
+    <h3>Description:</h3>
+    <p>{{ object.description }}</p>
+
+    <h3>Donates:</h3>
+    <ul>
+      {% for donat in object.donats.all %}
+        <li>{{ donat.user }} - ${{ donat.money }}</li>
+      {% endfor %}
+    </ul>
+
+    <div class="my-2">
+      <a class="btn btn-success"
+         href="{% url 'shop_projects:update-project' pk=object.pk %}">
+          Update</a>
+
+    <a class="btn btn-warning"
+       href="{% url 'shop_projects:confirm-delete-project' pk=object.pk %}">
+       Archive</a>
+    </div>
+
+  <div>
+    <a class="btn btn-secondary"
+       href="{% url back_url_to_all_objs %}">
+       To all {{ class_name_plural }}</a>
+  </div>
+{% endblock %}
+
