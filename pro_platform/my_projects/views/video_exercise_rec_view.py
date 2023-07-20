@@ -36,7 +36,7 @@ def save_tagged_image(image_bytes, path_tagged_image: str):
     image.save(path_tagged_image)
 
 
-EX_REC_SERVICE_URL = "http://127.0.0.1:9988/video"
+EX_REC_SERVICE_URL = "http://127.0.0.1:4777/video"
 
 
 def video_request(request):

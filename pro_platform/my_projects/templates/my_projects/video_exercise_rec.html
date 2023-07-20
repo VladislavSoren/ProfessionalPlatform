@@ -12,12 +12,13 @@ video loading
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Upload</button>
+    <button type="button" class="btn btn-primary">Predict!</button>
 </form>
 
 {% if video_object %}
-<h3>Succesfully uploaded : {{ video_object.name }}</h3>
-<img src="{{ path_tagged_video }}" alt="connect" style="max-height:500px">
+<div class="my-3">
+    <h3>Result:</h3>
+</div>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -34,6 +35,9 @@ video loading
     </tr>
     </tbody>
 </table>
+<div class="my-3">
+    <img src="{{ path_tagged_video }}" alt="connect" style="max-height:500px">
+</div>
 {% endif %}
 
 {% endblock %}
