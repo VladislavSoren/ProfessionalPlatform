@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from my_projects.views import image_sex_age_view
 from my_projects.views import image_car_num_view
+from my_projects.views import video_exercise_rec_view
 
 app_name = "my_projects"
 
@@ -21,5 +22,10 @@ urlpatterns = [
         "car_num_detection/",
         image_car_num_view.image_request,
         name="car_num_detection"
+    ),
+    path(
+        "exercise_recognition/",
+        video_exercise_rec_view.video_request,
+        name="exercise_recognition"
     ),
 ]

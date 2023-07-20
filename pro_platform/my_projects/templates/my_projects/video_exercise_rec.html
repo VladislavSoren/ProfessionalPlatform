@@ -1,0 +1,42 @@
+{% extends 'my_projects/index.html' %}
+
+{% block title %}
+video loading
+{% endblock %}
+
+{% block body %}
+<div class="my-3">
+    <h2>Exercise recognition</h2>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+
+{% if video_object %}
+<h3>Succesfully uploaded : {{ video_object.name }}</h3>
+<img src="{{ path_tagged_video }}" alt="connect" style="max-height:500px">
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Exercise type</th>
+        <th scope="col">Reps number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>{{ pred_type }}</td>
+        <td>{{ pred_count }}</td>
+    </tr>
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}
+
+
+

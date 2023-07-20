@@ -52,12 +52,27 @@
             <a class="dropdown-item" href="{% url 'my_projects:sex_age_detection' %}">About</a>
           </div>
         </li>
-<!--Car num detection-->
 
-
+<!--Exercise recognition-->
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle"
-           id="navbarDropdown01"
+           id="navbarDropdown1"
+           role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Exercise recognition
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'my_projects:exercise_recognition' %}">Try</a>
+            <a class="dropdown-item" href="{% url 'my_projects:exercise_recognition' %}">About</a>
+          </div>
+        </li>
+
+<!--Car num detection-->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"
+           id="navbarDropdown2"
            role="button"
            data-toggle="dropdown"
            aria-haspopup="true"
@@ -83,6 +98,9 @@
     <ul class="list-group">
       <li class="list-group-item list-group-item-action">
         <a href="{% url 'my_projects:sex_age_detection' %}">Sex-age humans detection</a>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'my_projects:exercise_recognition' %}">Exercise recognition</a>
       </li>
       <li class="list-group-item list-group-item-action">
         <a href="{% url 'my_projects:sex_age_detection' %}">Car numbers detection</a>
