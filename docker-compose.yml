@@ -1,0 +1,37 @@
+# Use postgres/example user/password credentials
+version: "3.9"
+
+services:
+
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${DB_PORT_OUT}:${DB_PORT}"
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASS}
+    ports:
+      - "5672:5672"
+      - "8080:15672"
+    volumes:
+      - rmq-data:/var/lib/rabbitmq
+
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+
+volumes:
+  db-data:
+  rmq-data:
