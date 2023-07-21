@@ -12,14 +12,14 @@ Image loading
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-     <input class="btn btn-primary" type="submit" value="Predict!">
+     <input class="btn btn-primary" type="submit" name="predict" value="Predict!">
 </form>
 
 
 
 {% if image_object %}
 <div class="my-3">
-    <h3>Detected number:  <span class="bord"><strong>{{ detected_number }}</strong></span></h3>
+    <h3>Detected car number:  <span class="bord"><strong>{{ detected_number }}</strong></span></h3>
 </div>
 <div class="my-3 d-flex justify-content-center">
     <img src="{{ path_tagged_image }}" alt="connect" style="max-height:300px" width="400">

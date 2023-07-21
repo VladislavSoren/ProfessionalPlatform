@@ -71,7 +71,7 @@ def video_api():
     # response = requests.get('http://127.0.0.1:9988')
     # json_input = response.json()
 
-    path_input_video_abs = '/home/soren/PycharmProjects/ProfessionalPlatform/pro_platform/media_for_tests/videos/pull_2.mp4'
+    path_input_video_abs = '/media_for_tests/videos/exercise_pull_2.mp4'
 
     # serialization
     json_out = {}

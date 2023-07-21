@@ -3,6 +3,8 @@ import io
 import os
 
 from django.shortcuts import redirect, render
+
+from my_projects.config import API_EX_REC_URL
 from my_projects.forms import VideoExerciseRecForm
 
 from PIL import Image
@@ -36,9 +38,6 @@ def save_tagged_image(image_bytes, path_tagged_image: str):
     image.save(path_tagged_image)
 
 
-EX_REC_SERVICE_URL = "http://127.0.0.1:4777/video"
-
-
 def video_request(request):
     if request.method == 'POST':
         form = VideoExerciseRecForm(request.POST, request.FILES)
@@ -59,7 +58,7 @@ def video_request(request):
             json_out['video_name'] = os.path.basename(path_input_video_abs)
 
             # sending video to service and receiving  response with tagged video
-            json_input: dict = get_prediction_by_req(EX_REC_SERVICE_URL, json_out)
+            json_input: dict = get_prediction_by_req(f'{API_EX_REC_URL}/video', json_out)
 
             #  deserialization
             pred_type = json_input['pred_type']

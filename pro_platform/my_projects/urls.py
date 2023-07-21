@@ -19,13 +19,14 @@ urlpatterns = [
         name="sex_age_detection"
     ),
     path(
-        "car_num_detection/",
-        image_car_num_view.image_request,
-        name="car_num_detection"
-    ),
-    path(
         "exercise_recognition/",
         video_exercise_rec_view.video_request,
         name="exercise_recognition"
     ),
+    path(
+        "car_num_detection/",
+        image_car_num_view.image_request,
+        name="car_num_detection"
+    ),
+
 ]

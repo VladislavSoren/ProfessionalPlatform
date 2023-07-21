@@ -6,15 +6,17 @@ from django.template.response import TemplateResponse
 from django.test import TestCase
 from django.urls import reverse
 
+from my_projects.config import API_SEX_AGE_URL
 from my_projects.forms import ImageSexAgeDetectForm
 from pro_platform.settings import BASE_DIR
 
 
 class SexAgeTryTestCase(TestCase):
 
+    try_page_url = reverse("my_projects:sex_age_detection")
+
     def test_form(self):
-        url = reverse("my_projects:sex_age_detection")
-        response: TemplateResponse = self.client.get(url)
+        response: TemplateResponse = self.client.get(self.try_page_url)
 
         ##########################
         # checking right template
@@ -38,19 +40,17 @@ class SexAgeTryTestCase(TestCase):
     def test_api(self):
 
         # check api is alive
-        api_url = "http://127.0.0.1:4888"
-        response = self.client.get(api_url)
+        response = self.client.get(API_SEX_AGE_URL)
         self.assertEqual(response.status_code, HTTPStatus.OK)  # note (later add urllib3.Retry)
 
         # check response from server (fill page and press "Predict!" button)
-        url = reverse("my_projects:sex_age_detection")
-        path_file = BASE_DIR / "media_for_tests" / "images" / "photo_2021-06-06_20-13-43.jpg"
+        path_file = BASE_DIR / "media_for_tests" / "images" / "img_sex_age.jpg"
         response: TemplateResponse = self.client.post(
-            url,
+            self.try_page_url,
             data={
                 'InputImage': open(path_file, 'rb'),
                 'name': '123',
                 'predict': 'Predict!',
             }
         )
-        self.assertTrue("Tagged image" in str(response.content))
+        self.assertTrue("Sex-age detection result" in str(response.content))
