@@ -68,8 +68,8 @@ EX_REC_SERVICE_URL = "http://127.0.0.1:9988/video"
 
 
 def video_api():
-    response = requests.get('http://127.0.0.1:9988')
-    json_input = response.json()
+    # response = requests.get('http://127.0.0.1:9988')
+    # json_input = response.json()
 
     path_input_video_abs = '/home/soren/PycharmProjects/ProfessionalPlatform/pro_platform/media_for_tests/videos/pull_2.mp4'
 

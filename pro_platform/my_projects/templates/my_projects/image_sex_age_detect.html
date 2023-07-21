@@ -12,7 +12,7 @@ Image loading
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-     <input class="btn btn-primary" type="submit" value="Predict!">
+     <input class="btn btn-primary" type="submit" name="predict" value="Predict!">
 </form>
 
 {% if image_object %}
