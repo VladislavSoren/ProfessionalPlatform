@@ -6,7 +6,7 @@ from .validators import validate_file_size
 
 class ImageSexAgeDetect(models.Model):
     name = models.CharField(max_length=50)
-    ImgSexAgeDetect = models.ImageField(upload_to='images/')
+    InputImage = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.name
@@ -14,7 +14,7 @@ class ImageSexAgeDetect(models.Model):
 
 class ImageCarNumDetect(models.Model):
     name = models.CharField(max_length=50)
-    ImgCarNumDetect = models.ImageField(upload_to='images/')
+    InputImage = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.name
@@ -22,7 +22,7 @@ class ImageCarNumDetect(models.Model):
 
 class VideoExerciseRec(models.Model):
     name = models.CharField(max_length=50)
-    VideoField = models.FileField(
+    InputVideo = models.FileField(
         upload_to='videos/',
         validators=[validate_file_size],
         null=True,

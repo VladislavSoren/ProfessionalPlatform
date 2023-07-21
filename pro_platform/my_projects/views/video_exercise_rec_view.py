@@ -49,7 +49,7 @@ def video_request(request):
             video_object = form.instance
 
             # Getting path for saving input video
-            path_input_video = video_object.VideoField.url
+            path_input_video = video_object.InputVideo.url
             path_input_video_abs = BASE_DIR / path_input_video[1:]  # ignore first "/" in video path
 
             # serialization

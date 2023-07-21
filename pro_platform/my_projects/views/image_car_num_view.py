@@ -49,7 +49,7 @@ def image_request(request):
             image_object = form.instance
 
             # Getting path for saving input image
-            path_input_image = image_object.ImgCarNumDetect.url
+            path_input_image = image_object.InputImage.url
             path_input_image_abs = BASE_DIR / path_input_image[1:]  # ignore first "/" in image path
 
             # serialization
