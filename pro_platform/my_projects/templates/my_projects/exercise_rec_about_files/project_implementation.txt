@@ -1,0 +1,3 @@
+Implemented API based on FastAPI
+Production server - uvicorn
+Service running in Docker

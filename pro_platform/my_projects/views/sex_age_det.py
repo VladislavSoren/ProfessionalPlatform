@@ -2,6 +2,7 @@ import base64
 import io
 import os
 
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from my_projects.config import API_SEX_AGE_URL
@@ -77,13 +78,60 @@ def image_request(request):
 
             return render(
                 request,
-                'my_projects/image_sex_age_detect.html',
+                'my_projects/sex_age_det_try.html',
                 {'form': form, 'image_object': image_object, 'path_tagged_image': path_tagged_image_for_form}
             )
     else:
         form = ImageSexAgeDetectForm()
     return render(
         request,
-        'my_projects/image_sex_age_detect.html',
+        'my_projects/sex_age_det_try.html',
         {'form': form}
+    )
+
+
+def render_about(request: HttpRequest):
+    description_dir = BASE_DIR / 'my_projects' / 'templates' / 'my_projects' / 'sex_age_det_about_files'
+
+    path_general_description = description_dir / 'general_description.txt'
+    with open(path_general_description, mode='r') as f:
+        general_description_paras = f.readlines()
+
+    path_general_description = description_dir / 'service_functionality.txt'
+    with open(path_general_description, mode='r') as f:
+        service_functionality_paras = f.readlines()
+
+    path_general_description = description_dir / 'architecture.txt'
+    with open(path_general_description, mode='r') as f:
+        architecture_paras = f.readlines()
+
+    path_general_description = description_dir / 'project_implementation.txt'
+    with open(path_general_description, mode='r') as f:
+        project_implementation_paras = f.readlines()
+
+    path_general_description = description_dir / 'api_description.txt'
+    with open(path_general_description, mode='r') as f:
+        api_description_paras = f.readlines()
+
+    path_general_description = description_dir / 'links_to_source_code.txt'
+    with open(path_general_description, mode='r') as f:
+        links_to_source_code_paras = f.readlines()
+
+    whole_project_url = 'https://github.com/VladislavSoren/sex_age_humans_detection'
+    api_url = 'https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py'
+
+    return render(
+        request,
+        'my_projects/sex_age_det_about.html',
+        {
+            'general_description_paras': general_description_paras,
+            'service_functionality_paras': service_functionality_paras,
+            'architecture_paras': architecture_paras,
+            'project_implementation_paras': project_implementation_paras,
+            'api_description_paras': api_description_paras,
+            'whole_project_url': whole_project_url,
+            'api_url': api_url,
+
+            'links_to_source_code_paras': links_to_source_code_paras,
+        }
     )

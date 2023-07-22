@@ -34,19 +34,17 @@ Sales Shop Index
 
 {% block body %}
 
-<h1>Main page.</h1>
-
-<div>
-    <p>Links:</p>
-    <ul>
-        <li>
-            <a href="{% url 'shop_projects:index' %}">Shop projects</a>
-        </li>
-        <li>
-            <a href="{% url 'my_projects:index' %}">My_projects</a>
-        </li>
+<h1>APPs:</h1>
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'shop_projects:index' %}">Shop projects</a>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'my_projects:index' %}">My_projects</a>
+      </li>
     </ul>
-</div>
-
+  </div>
 
 {% endblock %}
+

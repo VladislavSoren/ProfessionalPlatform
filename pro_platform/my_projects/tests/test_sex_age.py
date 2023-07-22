@@ -22,7 +22,7 @@ class SexAgeTryTestCase(TestCase):
         # checking right template
         ##########################
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, "my_projects/image_sex_age_detect.html")
+        self.assertTemplateUsed(response, "my_projects/sex_age_det_try.html")
 
         ###################
         # checking content

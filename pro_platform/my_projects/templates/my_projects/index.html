@@ -49,7 +49,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{% url 'my_projects:sex_age_detection' %}">Try</a>
-            <a class="dropdown-item" href="{% url 'my_projects:sex_age_detection' %}">About</a>
+            <a class="dropdown-item" href="{% url 'my_projects:sex_age_det_about' %}">About</a>
           </div>
         </li>
 
@@ -65,7 +65,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{% url 'my_projects:exercise_recognition' %}">Try</a>
-            <a class="dropdown-item" href="{% url 'my_projects:exercise_recognition' %}">About</a>
+            <a class="dropdown-item" href="{% url 'my_projects:exercise_rec_about' %}">About</a>
           </div>
         </li>
 
@@ -81,7 +81,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{% url 'my_projects:car_num_detection' %}">Try</a>
-            <a class="dropdown-item" href="{% url 'my_projects:car_num_detection' %}">About</a>
+            <a class="dropdown-item" href="{% url 'my_projects:car_num_det_about' %}">About</a>
           </div>
         </li>
 
@@ -109,4 +109,9 @@
   </div>
 {% endblock %}
 
+{% block signature %}
+<div class="mt-1 mt-md-3 my-3">
+  &copy; SOREN 2023
+</div>
+{% endblock %}
 

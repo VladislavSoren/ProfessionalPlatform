@@ -1,0 +1,85 @@
+{% extends 'my_projects/index.html' %}
+
+{% block title %}
+  Car-num det about
+{% endblock %}
+
+{% block body %}
+<h2>Car numbers detection service</h2>
+
+<div class="my-4">
+        <h3>General description:</h3>
+        {% for paragraph in general_description_paras %}
+            <p>
+                {{ paragraph }}
+            </p>
+
+        {% endfor %}
+</div>
+
+<div class="my-4">
+        <h3>Service functionality:</h3>
+        <ul>
+        {% for paragraph in service_functionality_paras %}
+            <li>
+                <p>{{ paragraph }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+</div>
+
+<div class="my-4">
+        <h3>Architecture:</h3>
+        <ul>
+        {% for paragraph in architecture_paras %}
+            <li>
+                <p>{{ paragraph }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+</div>
+
+<div class="my-4">
+        <h3>Project implementation:</h3>
+        <ul>
+        {% for paragraph in project_implementation_paras %}
+            <li>
+                <p>{{ paragraph }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+</div>
+
+<div class="my-4">
+        <h3>API description:</h3>
+        <ul>
+        {% for paragraph in api_description_paras %}
+            <li>
+                <p>{{ paragraph }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+</div>
+
+<div class="my-4">
+        <h3>Links to source code:</h3>
+        <ul>
+            <li>
+                <a
+                    class="btn-link my-1"
+                    href="{{ whole_project_url }}">
+                    Whole project url
+                </a>
+            </li>
+            <li>
+                <a
+                    class="btn-link my-1"
+                    href="{{ api_url }}">
+                    API url
+                </a>
+            </li>
+        </ul>
+</div>
+
+{% endblock %}
+

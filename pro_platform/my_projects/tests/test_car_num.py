@@ -22,7 +22,7 @@ class CarNumTryTestCase(TestCase):
         # checking right template
         ##########################
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, "my_projects/image_car_num_detect.html")
+        self.assertTemplateUsed(response, "my_projects/car_num_det_try.html")
 
         ###################
         # checking content

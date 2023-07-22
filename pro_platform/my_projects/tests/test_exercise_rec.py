@@ -22,7 +22,7 @@ class ExRecTryTestCase(TestCase):
         # checking right template
         ##########################
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, "my_projects/video_exercise_rec.html")
+        self.assertTemplateUsed(response, "my_projects/exercise_rec_try.html")
 
         ###################
         # checking content

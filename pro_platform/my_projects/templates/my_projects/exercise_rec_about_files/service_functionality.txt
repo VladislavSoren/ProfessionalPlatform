@@ -1,0 +1,3 @@
+Human Face Detection: Dual Shot Face Detector (DSFD detector)
+Human Gender Determination: SSR-Net (Soft Stagewise Regression Network)
+Determination of human age: SSR-Net

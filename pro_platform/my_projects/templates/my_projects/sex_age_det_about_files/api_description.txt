@@ -1,0 +1,2 @@
+Input json format is controlled (pydantic)
+*Functionality will be expanded
