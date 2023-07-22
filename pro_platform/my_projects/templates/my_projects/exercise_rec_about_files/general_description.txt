@@ -1,1 +1,1 @@
-Service for detecting human faces and determining gender and age in an image.
+Service for the classification of physical exercises by video.

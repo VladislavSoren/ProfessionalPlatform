@@ -1,2 +1,2 @@
-Whole project (https://github.com/VladislavSoren/sex_age_humans_detection)
-API (https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py)
+Whole project (https://github.com/VladislavSoren/Exercise_classifier)
+API (https://github.com/VladislavSoren/Exercise_classifier/blob/main/containers/exercise_class_api_container/main.py)

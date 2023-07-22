@@ -1,5 +1,6 @@
-Input image processing module
-DSFD detector (finds fragments with faces in the image)
-SSR-Net (determines the gender of people in found fragments)
-Second (SSR-Net determines the age of people in found fragments)
-Module for applying predictions to the original image
+Input video processing module - cutting, formatting, etc.
+Yolo3 (Object Detection Net) - getting Bounding box coordinates
+ResNet (Pose Estimation Net) - obtaining coordinates of human articular nodes
+Yolo3 and ResNet output data preprocessing module
+Classifier (separately trained on the collected base) - classification based on processed data from models
+Module for counting the number of repetitions of an exercise on video

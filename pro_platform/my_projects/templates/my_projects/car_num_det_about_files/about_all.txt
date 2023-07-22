@@ -1,16 +1,13 @@
-Сервис по детектированию человеческих лиц и определению пола и возраста на изображении.
+Сервис по распознаванию автомобильных номеров на изображении
 
 Функции:
-Обнаружение человеческих лиц: Dual Shot Face Detector (DSFD detector)
-Определение пола человека: SSR-Net (Soft Stagewise Regression Network)
-Определение возраста человека: SSR-Net
+Распознавание автомобильного номера на изображении
 
 Архитектура:
 Модуль обработки входного изображения
-DSFD detector (находит фрагменты с лицами на изображении)
-SSR-Net (определяет пол людей в найденных фрагментах)
-Вторая (SSR-Net определяет возраст людей в найденных фрагментах)
-Содуль нанесения предсказаний на исходное изображение
+ResNET (находит фрагмент с автомобильным номером на изображении)
+Модуль выравнивания найденного фрагмента
+Number detector (определяет содержимое автомобильного номера)
 
 Проектная реализация:
 Реализовано API на базе FastAPI
@@ -22,36 +19,32 @@ SSR-Net (определяет пол людей в найденных фрагм
 *Функционал будет расширяться
 
 Ссылки на исходный код:
-Весь проект (https://github.com/VladislavSoren/sex_age_humans_detection)
-API (https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py)
+Весь проект (https://github.com/pavelnebel/car_numbers_detection)
+API (https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py)
+*сервис реализован совместно с моим товарищем программистом "pavelnebel"
 
 
-
-Service for detecting human faces and determining gender and age in an image.
+Service for recognizing car number in the image
 
 Functions:
-Human Face Detection: Dual Shot Face Detector (DSFD detector)
-Human Gender Determination: SSR-Net (Soft Stagewise Regression Network)
-Determination of human age: SSR-Net
+Car number recognition in the image
 
 Architecture:
 Input image processing module
-DSFD detector (finds fragments with faces in the image)
-SSR-Net (determines the gender of people in found fragments)
-Second (SSR-Net determines the age of people in found fragments)
-Module for applying predictions to the original image
+ResNET (finds a fragment with a car number on the image)
+Found Fragment Alignment Module
+Number detector (determines the contents of the car number)
 
-Project implementation:
+Design implementation:
 Implemented API based on FastAPI
 Production server - uvicorn
 Service running in Docker
 
-API Description:
+API description:
 Input json format is controlled (pydantic)
 *Functionality will be expanded
 
 Links to source code:
-Whole project (https://github.com/VladislavSoren/sex_age_humans_detection)
-API (https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py)
-
-
+Whole project (https://github.com/pavelnebel/car_numbers_detection)
+API (https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py)
+*service implemented jointly with my fellow programmer "pavelnebel"

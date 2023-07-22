@@ -1,3 +1,2 @@
-Human Face Detection: Dual Shot Face Detector (DSFD detector)
-Human Gender Determination: SSR-Net (Soft Stagewise Regression Network)
-Determination of human age: SSR-Net
+Classification of physical exercises by video (pull-ups, squats, push-ups on the uneven bars)
+Counting the number of repetitions

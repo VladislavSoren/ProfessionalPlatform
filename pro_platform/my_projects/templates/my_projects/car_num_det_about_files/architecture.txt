@@ -1,5 +1,4 @@
 Input image processing module
-DSFD detector (finds fragments with faces in the image)
-SSR-Net (determines the gender of people in found fragments)
-Second (SSR-Net determines the age of people in found fragments)
-Module for applying predictions to the original image
+ResNET (finds a fragment with a car number on the image)
+Found Fragment Alignment Module
+Number detector (determines the contents of the car number)

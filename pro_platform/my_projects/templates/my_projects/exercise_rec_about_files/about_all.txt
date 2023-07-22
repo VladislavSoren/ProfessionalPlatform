@@ -1,16 +1,17 @@
-Сервис по детектированию человеческих лиц и определению пола и возраста на изображении.
+Сервис по классификации физических упражнений по видео
 
 Функции:
-Обнаружение человеческих лиц: Dual Shot Face Detector (DSFD detector)
-Определение пола человека: SSR-Net (Soft Stagewise Regression Network)
-Определение возраста человека: SSR-Net
+Классификация физических упражнений по видео (подтягивания, приседания, отжимания на брусьях)
+Подсчет количества повторений
 
 Архитектура:
-Модуль обработки входного изображения
-DSFD detector (находит фрагменты с лицами на изображении)
-SSR-Net (определяет пол людей в найденных фрагментах)
-Вторая (SSR-Net определяет возраст людей в найденных фрагментах)
-Содуль нанесения предсказаний на исходное изображение
+Модуль обработки входного видео - нарезка, форматирование и т.п.
+Yolo3 (Object Detection Net) - получение координат Bounding box
+ResNet (Pose Estimation Net) - получение координат суставных узлов человека
+Модуль предобработки данных на выходе Yolo3 и ResNet
+Классификатор (отдельно обучен на собранной базе) - классификация на основе обработанных данных из моделей
+Модуль подсчёта количества повторений упражнения на видео
+
 
 Проектная реализация:
 Реализовано API на базе FastAPI
@@ -22,36 +23,35 @@ SSR-Net (определяет пол людей в найденных фрагм
 *Функционал будет расширяться
 
 Ссылки на исходный код:
-Весь проект (https://github.com/VladislavSoren/sex_age_humans_detection)
-API (https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py)
+Весь проект (https://github.com/VladislavSoren/Exercise_classifier)
+API (https://github.com/VladislavSoren/Exercise_classifier/blob/main/containers/exercise_class_api_container/main.py)
 
 
 
-Service for detecting human faces and determining gender and age in an image.
+Service for the classification of physical exercises by video.
 
 Functions:
-Human Face Detection: Dual Shot Face Detector (DSFD detector)
-Human Gender Determination: SSR-Net (Soft Stagewise Regression Network)
-Determination of human age: SSR-Net
+Classification of physical exercises by video (pull-ups, squats, push-ups on the uneven bars)
+Counting the number of repetitions
 
 Architecture:
-Input image processing module
-DSFD detector (finds fragments with faces in the image)
-SSR-Net (determines the gender of people in found fragments)
-Second (SSR-Net determines the age of people in found fragments)
-Module for applying predictions to the original image
+Input video processing module - cutting, formatting, etc.
+Yolo3 (Object Detection Net) - getting Bounding box coordinates
+ResNet (Pose Estimation Net) - obtaining coordinates of human articular nodes
+Yolo3 and ResNet output data preprocessing module
+Classifier (separately trained on the collected base) - classification based on processed data from models
+Module for counting the number of repetitions of an exercise on video
 
-Project implementation:
+
+Design implementation:
 Implemented API based on FastAPI
-Production server - uvicorn
+Grocery server - uvicorn
 Service running in Docker
 
-API Description:
+API description:
 Input json format is controlled (pydantic)
 *Functionality will be expanded
 
 Links to source code:
-Whole project (https://github.com/VladislavSoren/sex_age_humans_detection)
-API (https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py)
-
-
+Whole project (https://github.com/VladislavSoren/Exercise_classifier)
+API (https://github.com/VladislavSoren/Exercise_classifier/blob/main/containers/exercise_class_api_container/main.py)
