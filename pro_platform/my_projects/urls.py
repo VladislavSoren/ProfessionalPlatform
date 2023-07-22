@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from my_projects.views import sex_age_det
 from my_projects.views import car_num_det
 from my_projects.views import exercise_rec
+from my_projects.views import koncert_bot
 
 app_name = "my_projects"
 
@@ -15,6 +16,8 @@ urlpatterns = [
 
     path("exercise_recognition/", exercise_rec.video_request, name="exercise_recognition"),
     path("exercise_recognition/about/", exercise_rec.render_about, name="exercise_rec_about"),
+
+    path("koncert_bot/", koncert_bot.render_about, name="koncert_bot"),
 
     path("car_num_detection/", car_num_det.image_request, name="car_num_detection"),
     path("car_num_detection/about/", car_num_det.render_about, name="car_num_det_about"),

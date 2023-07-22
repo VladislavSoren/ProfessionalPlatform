@@ -26,14 +26,14 @@ API (https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/
 
 Service for recognizing car number in the image
 
-Functions:
+Service functionality:
 Car number recognition in the image
 
 Architecture:
 Input image processing module
-ResNET (finds a fragment with a car number on the image)
+ResNET - finds a fragment with a car number on the image
 Found Fragment Alignment Module
-Number detector (determines the contents of the car number)
+Number detector - determines the contents of the car number
 
 Design implementation:
 Implemented API based on FastAPI

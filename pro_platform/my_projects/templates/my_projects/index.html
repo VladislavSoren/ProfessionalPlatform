@@ -69,6 +69,14 @@
           </div>
         </li>
 
+<!--Koncert bot-->
+        <li class="nav-item">
+        <a class="nav-link"
+            href="{% url 'my_projects:koncert_bot' %}">
+            Koncert bot
+          </a>
+        </li>
+
 <!--Car num detection-->
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle"
@@ -101,6 +109,9 @@
       </li>
       <li class="list-group-item list-group-item-action">
         <a href="{% url 'my_projects:exercise_recognition' %}">Exercise recognition</a>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <a href="{% url 'my_projects:koncert_bot' %}">Koncert bot</a>
       </li>
       <li class="list-group-item list-group-item-action">
         <a href="{% url 'my_projects:sex_age_detection' %}">Car numbers detection</a>
