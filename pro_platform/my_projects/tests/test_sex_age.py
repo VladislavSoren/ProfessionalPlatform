@@ -12,7 +12,6 @@ from pro_platform.settings import BASE_DIR
 
 
 class SexAgeTryTestCase(TestCase):
-
     try_page_url = reverse("my_projects:sex_age_detection")
 
     def test_form(self):
@@ -38,7 +37,6 @@ class SexAgeTryTestCase(TestCase):
         )
 
     def test_api(self):
-
         # check api is alive
         response = self.client.get(API_SEX_AGE_URL)
         self.assertEqual(response.status_code, HTTPStatus.OK)  # note (later add urllib3.Retry)

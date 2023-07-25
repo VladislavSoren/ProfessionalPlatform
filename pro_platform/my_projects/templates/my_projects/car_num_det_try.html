@@ -5,8 +5,17 @@ Image loading
 {% endblock %}
 
 {% block body %}
-<div class="my-3">
-<h2>Car numbers detection</h2>
+<div class="divs_inline">
+    <div>
+    Car numbers detection
+    </div>
+    <div>
+        <div style="justify-content: flex-end">
+            <a class="btn btn-success my-2"
+            href="{% url 'my_projects:car_num_det_about' %}">
+            About</a>
+        </div>
+    </div>
 </div>
 
 <form method="post" enctype="multipart/form-data">

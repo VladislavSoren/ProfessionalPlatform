@@ -5,9 +5,20 @@ Image loading
 {% endblock %}
 
 {% block body %}
-<div class="my-3">
-<h2>Sex-age detection</h2>
+
+<div class="divs_inline">
+    <div>
+    Sex-age detection
+    </div>
+    <div>
+        <div style="justify-content: flex-end">
+            <a class="btn btn-success my-2"
+            href="{% url 'my_projects:sex_age_det_about' %}">
+            About</a>
+        </div>
+    </div>
 </div>
+
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -23,6 +34,12 @@ Image loading
     <img src="{{ path_tagged_image }}" alt="connect" style="max-height:300px">
 </div>
 {% endif %}
+
+<div class="my-1">
+<a class="btn btn-warning"
+   href="{% url 'my_projects:index' %}">
+   Back to projects</a>
+</div>
 
 {% endblock %}
 

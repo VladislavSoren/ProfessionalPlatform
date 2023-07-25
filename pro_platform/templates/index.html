@@ -35,16 +35,55 @@ Sales Shop Index
 {% block body %}
 
 <h1>APPs:</h1>
-  <div>
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-action">
-        <a href="{% url 'shop_projects:index' %}">Shop projects</a>
-      </li>
-      <li class="list-group-item list-group-item-action">
-        <a href="{% url 'my_projects:index' %}">My_projects</a>
-      </li>
-    </ul>
-  </div>
+
+<div class="learning-item">
+    <a href="{% url 'shop_projects:index' %}" class="learning-item__box">
+    <div class="learning-item__box2">
+    <div class="learning-item__title">Shop projects</div>
+    <div class="learning-item__text">
+    &#128640 Here are the <strong>projects</strong> and their <strong>creators</strong>
+    </div>
+    <div class="learning-item__text">
+    &#128204 Each <strong>project</strong> belongs to a <strong>category</strong>
+    </div>
+    <div class="learning-item__text">
+    &#128293 The <strong>user</strong> can become a <strong>creator</strong> and create a <strong>project</strong> by specifying a price
+    </div>
+    <div class="learning-item__text">
+    &#128176 <strong>Users</strong> can buy <strong>projects</strong> and make <strong>donats</strong> for their development
+    </div>
+    </div>
+    <br>
+
+    <div class="learning-item__text_center">
+    CLICK AND TRY!
+    </div>
+    </a>
+</div>
+
+<div class="learning-item my-2">
+    <a href="{% url 'my_projects:index' %}" class="learning-item__box">
+    <div class="learning-item__box2">
+    <div class="learning-item__title">My projects</div>
+    <div class="learning-item__text">
+    &#128293 <strong>Detecting</strong> human faces and determining <strong>gender</strong> and <strong>age</strong> in an image
+    </div>
+    <div class="learning-item__text">
+    &#128165 Try service for the <strong>classification</strong> of physical <strong>exercises</strong> by video
+    </div>
+    <div class="learning-item__text">
+    &#128640 Learn about <strong>Concert Information Service</strong>
+    </div>
+    <div class="learning-item__text">
+    &#128304 Try car number <strong>recognition service</strong>
+    </div>
+    </div>
+    <br>
+
+    <div class="learning-item__text_center">
+    CLICK AND TRY!
+    </div>
+    </a>
+</div>
 
 {% endblock %}
-

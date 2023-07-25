@@ -5,8 +5,17 @@ video loading
 {% endblock %}
 
 {% block body %}
-<div class="my-3">
-    <h2>Exercise recognition</h2>
+<div class="divs_inline">
+    <div>
+    Exercise recognition
+    </div>
+    <div>
+        <div style="justify-content: flex-end">
+            <a class="btn btn-success my-2"
+            href="{% url 'my_projects:exercise_rec_about' %}">
+            About</a>
+        </div>
+    </div>
 </div>
 
 <form method="post" enctype="multipart/form-data">
