@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import (
     login_required,
     user_passes_test,
 )
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
@@ -92,7 +92,7 @@ def order_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
     )
 
 
-class OrderCreateView(CreateView):
+class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
     form_class = OrderForm
     success_url = reverse_lazy("shop_projects:orders")
@@ -103,7 +103,7 @@ class OrderCreateView(CreateView):
     }
 
 
-class OrderUpdateView(UpdateView):
+class OrderUpdateView(LoginRequiredMixin, UpdateView):
     template_name_suffix = "_update_form"
     model = Order
     form_class = OrderForm

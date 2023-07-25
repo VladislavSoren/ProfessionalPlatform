@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin,
@@ -50,7 +51,7 @@ class DonatDetailView(UserPassesTestMixin, DetailView):
     }
 
 
-class DonatCreateView(CreateView):
+class DonatCreateView(LoginRequiredMixin, CreateView):
     model = Donat
     form_class = DonatForm
     success_url = reverse_lazy("shop_projects:donats")
@@ -61,7 +62,7 @@ class DonatCreateView(CreateView):
     }
 
 
-class DonatUpdateView(UpdateView):
+class DonatUpdateView(LoginRequiredMixin, UpdateView):
     template_name_suffix = "_update_form"
     model = Donat
     form_class = DonatForm
