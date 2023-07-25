@@ -1,5 +1,5 @@
 from django.db import models
-from .validators import validate_file_size
+from .validators import validate_file_size, validate_min_number_of_frames
 
 
 # Create your models here.
@@ -24,7 +24,7 @@ class VideoExerciseRec(models.Model):
     name = models.CharField(max_length=50)
     InputVideo = models.FileField(
         upload_to='videos/',
-        validators=[validate_file_size],
+        validators=[validate_file_size, validate_min_number_of_frames],
         null=True,
         verbose_name="")
 
