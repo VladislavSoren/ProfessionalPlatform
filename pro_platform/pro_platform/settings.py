@@ -185,6 +185,8 @@ if DEBUG:
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = False
 
+EMAIL_ADMIN_ADDRESS = "soren@admin.com"
+
 ########
 # Celery
 ########

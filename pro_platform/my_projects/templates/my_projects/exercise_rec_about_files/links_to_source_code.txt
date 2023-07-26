@@ -1,2 +1,2 @@
-Whole project (https://github.com/VladislavSoren/Exercise_classifier)
-API (https://github.com/VladislavSoren/Exercise_classifier/blob/main/containers/exercise_class_api_container/main.py)
+https://github.com/VladislavSoren/Exercise_classifier
+https://github.com/VladislavSoren/Exercise_classifier/blob/main/containers/exercise_class_api_container/main.py

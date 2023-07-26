@@ -4,10 +4,13 @@ import os
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+
+from my_projects.config import API_CAR_NUM_URL
 from my_projects.forms import ImageCarNumDetectForm
 
 from PIL import Image
 
+from my_projects.views.support_funcs import get_template_names_dict
 from pro_platform.settings import BASE_DIR
 import requests
 
@@ -37,9 +40,6 @@ def save_tagged_image(image_bytes, path_tagged_image: str):
     image.save(path_tagged_image)
 
 
-CAR_NUMBERS_DETECTION_SERVICE_URL = "http://127.0.0.1:4999/image"
-
-
 def image_request(request):
     if request.method == 'POST':
         form = ImageCarNumDetectForm(request.POST, request.FILES)
@@ -55,12 +55,13 @@ def image_request(request):
 
             # serialization
             json_out = {}
-            json_out['user'] = 'Soren'
+            json_out['user'] = request.user.username
             json_out['image'] = image_bytes_to_str(path_input_image_abs)
-            json_out['image_name'] = os.path.basename(path_input_image_abs)
+            image_name = os.path.basename(path_input_image_abs)
+            json_out['image_name'] = image_name
 
             # sending image to service and receiving  response with tagged image
-            json_input: dict = get_prediction_by_req(CAR_NUMBERS_DETECTION_SERVICE_URL, json_out)
+            json_input: dict = get_prediction_by_req(f'{API_CAR_NUM_URL}/image', json_out)
 
             #  deserialization
             image_bytes = base64.b64decode(json_input["tagged_image"])
@@ -71,11 +72,11 @@ def image_request(request):
             if not os.path.exists(path_tagged_dir): os.makedirs(path_tagged_dir)
 
             # absolute path
-            path_tagged_image = path_tagged_dir / json_out['image_name']
+            path_tagged_image = path_tagged_dir / image_name
             save_tagged_image(image_bytes, path_tagged_image)
 
             # relative path
-            path_tagged_image_for_form = f'''/media/images_tagged/{json_out['image_name']}'''
+            path_tagged_image_for_form = f'''/media/images_tagged/{image_name}'''
 
             return render(
                 request,
@@ -100,47 +101,12 @@ def image_request(request):
 def render_about(request: HttpRequest):
     description_dir = BASE_DIR / 'my_projects' / 'templates' / 'my_projects' / 'car_num_det_about_files'
 
-    path_general_description = description_dir / 'general_description.txt'
-    with open(path_general_description, mode='r') as f:
-        general_description_paras = f.readlines()
-
-    path_general_description = description_dir / 'service_functionality.txt'
-    with open(path_general_description, mode='r') as f:
-        service_functionality_paras = f.readlines()
-
-    path_general_description = description_dir / 'architecture.txt'
-    with open(path_general_description, mode='r') as f:
-        architecture_paras = f.readlines()
-
-    path_general_description = description_dir / 'project_implementation.txt'
-    with open(path_general_description, mode='r') as f:
-        project_implementation_paras = f.readlines()
-
-    path_general_description = description_dir / 'api_description.txt'
-    with open(path_general_description, mode='r') as f:
-        api_description_paras = f.readlines()
-
-    path_general_description = description_dir / 'links_to_source_code.txt'
-    with open(path_general_description, mode='r') as f:
-        links_to_source_code_paras = f.readlines()
-
-    whole_project_url = 'https://github.com/pavelnebel/car_numbers_detection'
-    api_url = 'https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py'
+    template_names_dict = get_template_names_dict(description_dir)
 
     return render(
         request,
         'my_projects/car_num_det_about.html',
-        {
-            'general_description_paras': general_description_paras,
-            'service_functionality_paras': service_functionality_paras,
-            'architecture_paras': architecture_paras,
-            'project_implementation_paras': project_implementation_paras,
-            'api_description_paras': api_description_paras,
-            'whole_project_url': whole_project_url,
-            'api_url': api_url,
-
-            'links_to_source_code_paras': links_to_source_code_paras,
-        }
+        template_names_dict,
     )
 
 

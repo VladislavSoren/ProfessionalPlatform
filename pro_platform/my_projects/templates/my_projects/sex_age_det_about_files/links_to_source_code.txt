@@ -1,2 +1,2 @@
-Whole project (https://github.com/VladislavSoren/sex_age_humans_detection)
-API (https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py)
+https://github.com/VladislavSoren/sex_age_humans_detection
+https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py

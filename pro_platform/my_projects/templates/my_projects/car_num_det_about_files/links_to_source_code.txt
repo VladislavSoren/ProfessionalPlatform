@@ -1,4 +1,4 @@
-Whole project (https://github.com/pavelnebel/car_numbers_detection)
-API (https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py)
+https://github.com/pavelnebel/car_numbers_detection
+https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py
 *service implemented jointly with my fellow programmer "pavelnebel"
 

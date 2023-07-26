@@ -10,6 +10,7 @@ from my_projects.forms import VideoExerciseRecForm
 
 from PIL import Image
 
+from my_projects.views.support_funcs import get_template_names_dict
 from pro_platform.settings import BASE_DIR
 import requests
 
@@ -54,9 +55,10 @@ def video_request(request):
 
             # serialization
             json_out = {}
-            json_out['user'] = 'Soren'
+            json_out['user'] = request.user.username
             json_out['video'] = media_bytes_to_str(path_input_video_abs)
-            json_out['video_name'] = os.path.basename(path_input_video_abs)
+            video_name = os.path.basename(path_input_video_abs)
+            json_out['video_name'] = video_name
 
             # sending video to service and receiving  response with tagged video
             json_input: dict = get_prediction_by_req(f'{API_EX_REC_URL}/video', json_out)
@@ -71,7 +73,7 @@ def video_request(request):
             if not os.path.exists(path_tagged_dir): os.makedirs(path_tagged_dir)
 
             # absolute path
-            gif_name = f'''{json_out['video_name'].split('.')[0]}.gif'''
+            gif_name = f'''{video_name.split('.')[0]}.gif'''
             path_tagged_video = path_tagged_dir / gif_name
             with open(path_tagged_video, mode='wb') as f:
                 f.write(gif_bytes)  # save video to disk
@@ -102,47 +104,12 @@ def video_request(request):
 def render_about(request: HttpRequest):
     description_dir = BASE_DIR / 'my_projects' / 'templates' / 'my_projects' / 'exercise_rec_about_files'
 
-    path_general_description = description_dir / 'general_description.txt'
-    with open(path_general_description, mode='r') as f:
-        general_description_paras = f.readlines()
-
-    path_general_description = description_dir / 'service_functionality.txt'
-    with open(path_general_description, mode='r') as f:
-        service_functionality_paras = f.readlines()
-
-    path_general_description = description_dir / 'architecture.txt'
-    with open(path_general_description, mode='r') as f:
-        architecture_paras = f.readlines()
-
-    path_general_description = description_dir / 'project_implementation.txt'
-    with open(path_general_description, mode='r') as f:
-        project_implementation_paras = f.readlines()
-
-    path_general_description = description_dir / 'api_description.txt'
-    with open(path_general_description, mode='r') as f:
-        api_description_paras = f.readlines()
-
-    path_general_description = description_dir / 'links_to_source_code.txt'
-    with open(path_general_description, mode='r') as f:
-        links_to_source_code_paras = f.readlines()
-
-    whole_project_url = 'https://github.com/VladislavSoren/Exercise_classifier'
-    api_url = 'https://github.com/VladislavSoren/Exercise_classifier/blob/main/containers/exercise_class_api_container/main.py'
+    template_names_dict = get_template_names_dict(description_dir)
 
     return render(
         request,
         'my_projects/exercise_rec_about.html',
-        {
-            'general_description_paras': general_description_paras,
-            'service_functionality_paras': service_functionality_paras,
-            'architecture_paras': architecture_paras,
-            'project_implementation_paras': project_implementation_paras,
-            'api_description_paras': api_description_paras,
-            'whole_project_url': whole_project_url,
-            'api_url': api_url,
-
-            'links_to_source_code_paras': links_to_source_code_paras,
-        }
+        template_names_dict,
     )
 
 

@@ -19,26 +19,25 @@ class BaseForm(forms.ModelForm):
 class ImageSexAgeDetectForm(BaseForm):
     class Meta:
         model = ImageSexAgeDetect
-        # fields = ['name', 'ImgSexAgeDetect']
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        fields = (
+            'name',
+            'InputImage',
+        )
 
 
 class ImageCarNumDetectForm(BaseForm):
     class Meta:
         model = ImageCarNumDetect
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        fields = (
+            'name',
+            'InputImage',
+        )
 
 
 class VideoExerciseRecForm(BaseForm):
     class Meta:
         model = VideoExerciseRec
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        fields = (
+            'name',
+            'InputVideo',
+        )
