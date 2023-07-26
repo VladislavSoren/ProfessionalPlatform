@@ -2,7 +2,7 @@ import base64
 import io
 import os
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
 from my_projects.config import API_EX_REC_URL
@@ -144,3 +144,14 @@ def render_about(request: HttpRequest):
             'links_to_source_code_paras': links_to_source_code_paras,
         }
     )
+
+
+def download_video_for_predict(request: HttpRequest) -> HttpResponse:
+    image_path = BASE_DIR / 'media_for_tests' / 'videos' / 'pull_ups_2.mp4'
+
+    with open(image_path, "rb") as f:
+        return HttpResponse(
+            f.read(),
+            content_type="video/mp4",
+            headers={"Content-Disposition": 'attachment; filename="video_test.mp4"'},
+        )

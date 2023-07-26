@@ -82,9 +82,16 @@ Load users
 python manage.py dumpdata auth.user  > shop_projects/fixtures/user-fix.json
 ```
 
-<!--    <p class="h3 my-3">Sections:</p>-->
+Получить ответ с данного адреса в консоль
+```shell
+curl http://127.0.0.1:4666/my_projects/exercise_recognition/about/
+```
+
+Получить ответ с данного адреса в консоль (через http лучше)
+```shell
+http http://127.0.0.1:4666/my_projects/exercise_recognition/about/
+```
 
 Questions:
-
 - How config `static(settings.MEDIA_URL` in prod?
 - Django автоматически создают тестовую БД (создаёт ли для постгрес?)

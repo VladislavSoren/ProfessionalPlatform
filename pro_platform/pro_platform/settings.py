@@ -35,6 +35,9 @@ ALLOWED_HOSTS = [
     "192.168.32.1",
     "109.201.65.62",
 ]
+
+# "security" filter, allowing Django to know whether it is OK (or not)
+# to disclose sensitive information within its requests and Debug information output
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",

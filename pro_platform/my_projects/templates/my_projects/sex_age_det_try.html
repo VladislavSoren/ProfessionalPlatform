@@ -12,13 +12,18 @@ Image loading
     </div>
     <div>
         <div style="justify-content: flex-end">
-            <a class="btn btn-success my-2"
+            <a class="btn btn-info my-2"
             href="{% url 'my_projects:sex_age_det_about' %}">
             About</a>
         </div>
     </div>
 </div>
 
+<div class="my-1">
+<a class="btn btn-success"
+   href="{% url 'my_projects:sex_age_det_img' %}">
+   Download image for test</a>
+</div>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

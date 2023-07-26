@@ -2,7 +2,7 @@ import base64
 import io
 import os
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
 from my_projects.config import API_SEX_AGE_URL
@@ -135,3 +135,14 @@ def render_about(request: HttpRequest):
             'links_to_source_code_paras': links_to_source_code_paras,
         }
     )
+
+
+def download_image_for_predict(request: HttpRequest) -> HttpResponse:
+    image_path = BASE_DIR / 'media_for_tests' / 'images' / 'img_sex_age.jpg'
+
+    with open(image_path, "rb") as f:
+        return HttpResponse(
+            f.read(),
+            content_type="image/jpeg",
+            headers={"Content-Disposition": 'attachment; filename="image_test.jpg"'},
+        )
