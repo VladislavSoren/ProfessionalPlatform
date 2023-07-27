@@ -1,57 +1,28 @@
-from http import HTTPStatus
-
-from django.template.response import TemplateResponse
 from django.test import TestCase
-from django.urls import reverse_lazy
 
 from my_projects.config import API_EX_REC_URL
 from my_projects.forms import VideoExerciseRecForm
-from pro_platform.settings import BASE_DIR
+from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing
 
 
 class ExRecTryPageTestCase(TestCase):
-    try_page_url = reverse_lazy("my_projects:exercise_recognition")
 
     def test_form(self):
-
-        response: TemplateResponse = self.client.get(self.try_page_url)
-
-        ##########################
-        # checking right template
-        ##########################
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, "my_projects/exercise_rec_try.html")
-
-        ###################
-        # checking content
-        ###################
+        try_page_path = "my_projects:exercise_recognition"
+        try_template_path = "my_projects/exercise_rec_try.html"
         form = VideoExerciseRecForm()
 
-        # check using right form
-        self.assertEqual(response.context['form'].Meta, form.Meta)
+        try_page_form_testing(self, try_page_path, try_template_path, form)
 
-        # check for a button
-        self.assertTrue(
-            '''type="submit" name="predict" value="Predict!"''' in str(response.content)
+
+class ExRecApiTestCase(TestCase):
+
+    def test_api(self):
+        try_page_api_testing(
+            self,
+            try_page_path="my_projects:exercise_recognition",
+            api_url=API_EX_REC_URL,
+            path_test_file="videos/pull_ups_2.mp4",
+            input_file_field_name="InputVideo",
+            success_text="Exercise recognition result",
         )
-
-
-# class ExRecApiTestCase(TestCase):
-#     try_page_url = reverse_lazy("my_projects:exercise_recognition")
-#
-#     def test_api(self):
-#         # check api is alive
-#         response = self.client.get(API_EX_REC_URL)
-#         self.assertEqual(response.status_code, HTTPStatus.OK)  # note (later add urllib3.Retry)
-#
-#         # check response from server (fill page and press "Predict!" button)
-#         path_file = BASE_DIR / "media_for_tests" / "videos" / "pull_ups_2.mp4"
-#         response: TemplateResponse = self.client.post(
-#             self.try_page_url,
-#             data={
-#                 'InputVideo': open(path_file, 'rb'),
-#                 'name': '123',
-#                 'predict': 'Predict!',
-#             }
-#         )
-#         self.assertTrue("Exercise recognition result" in str(response.content))

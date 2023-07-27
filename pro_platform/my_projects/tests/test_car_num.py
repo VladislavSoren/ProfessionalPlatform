@@ -1,57 +1,27 @@
-from http import HTTPStatus
-
-from django.template.response import TemplateResponse
 from django.test import TestCase
-from django.urls import reverse_lazy, reverse
 
 from my_projects.config import API_CAR_NUM_URL
 from my_projects.forms import ImageCarNumDetectForm
-from pro_platform.settings import BASE_DIR
+from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing
 
 
-class CarNumTryTestCase(TestCase):
+class CarNumTryPageTestCase(TestCase):
 
     def test_form(self):
-        try_page_url = reverse("my_projects:car_num_detection")
-        response: TemplateResponse = self.client.get(try_page_url)
-
-        ##########################
-        # checking right template
-        ##########################
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, "my_projects/car_num_det_try.html")
-
-        ###################
-        # checking content
-        ###################
+        try_page_path = "my_projects:car_num_detection"
+        try_template_path = "my_projects/car_num_det_try.html"
         form = ImageCarNumDetectForm()
 
-        # check using right form
-        self.assertEqual(response.context['form'].Meta, form.Meta)
+        try_page_form_testing(self, try_page_path, try_template_path, form)
 
-        # check for a button
-        self.assertTrue(
-            '''type="submit" name="predict" value="Predict!"''' in str(response.content)
+
+class CarNumApiTestCase(TestCase):
+    def test_api(self):
+        try_page_api_testing(
+            self,
+            try_page_path="my_projects:car_num_detection",
+            api_url=API_CAR_NUM_URL,
+            path_test_file="images/img_car_num.jpeg",
+            input_file_field_name="InputImage",
+            success_text="Detected car number",
         )
-
-        self.assertIn(
-            '''type="submit" name="predict" value="Predict!"''', str(response.content)
-        )
-
-    # def test_api(self):
-    #
-    #     # check api is alive
-    #     response = self.client.get(API_CAR_NUM_URL)
-    #     self.assertEqual(response.status_code, HTTPStatus.OK)  # note (later add urllib3.Retry)
-    #
-    #     # check response from server (fill page and press "Predict!" button)
-    #     path_file = BASE_DIR / "media_for_tests" / "images" / "img_car_num.jpeg"
-    #     response: TemplateResponse = self.client.post(
-    #         self.try_page_url,
-    #         data={
-    #             'InputImage': open(path_file, 'rb'),
-    #             'name': '123',
-    #             'predict': 'Predict!',
-    #         }
-    #     )
-    #     self.assertTrue("Detected car number" in str(response.content))
