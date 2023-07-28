@@ -1,10 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Sum
-from django.db.models.signals import post_save, m2m_changed
-from django.dispatch import receiver
-
-from .tasks import notify_order_saved
 
 
 class BaseModel(models.Model):  # base class should subclass 'django.db.models.Model'
@@ -112,43 +107,6 @@ class OrderPaymentDetails(models.Model):
     status = models.IntegerField(
         choices=Status.choices,
         default=Status.PENDING,
-    )
-
-
-# def on_order_create_add_payment_details
-@receiver(post_save, sender=Order)
-def on_order_save(instance: Order, created: bool, **kwargs):
-
-    # query_aggr_proj_sum = (
-    #     Order
-    #     .objects
-    #     .filter(status=Order.Status.AVAILABLE)
-    #     .order_by("id")
-    #     .prefetch_related("projects")
-    #     .values('id')
-    #     .annotate(Sum('projects__price'))
-    # )
-    # pass
-    #
-    # @receiver(m2m_changed, sender=Order)
-    # def on_order_m2m_changed(instance: Order, created: bool, **kwargs):
-    #     instance
-    #     pass
-
-    notify_order_saved.delay(
-        order_pk=instance.pk,
-        promocode=instance.promocode,
-        user_email=instance.user.email
-    )
-
-    if not created:
-        return
-
-    # opd_obj = data from form
-
-    OrderPaymentDetails.objects.get_or_create(
-        order=instance,
-        # card_ends_with='*369'
     )
 
 

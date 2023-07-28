@@ -22,6 +22,8 @@ class UserCreationForm(UserCreationFormGeneric):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.fields['email'].required = True
+
         for name, field in self.fields.items():
             field: forms.Field
             widget: forms.Widget = field.widget

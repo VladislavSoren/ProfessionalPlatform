@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+      <h3>Hi, {{ user.username }}!</h3>
+      <h4>Order {{ order_pk }} got updated</h4>
+
+      <ul>
+      {% for name, price in projects_info_dict.items %}
+        <li>{{ name }} : {{ price }}$</li>
+      {% endfor %}
+      </ul>
+      <h3>Total sum: {{ order_total_sum }}$</h3>
+
+      <div>
+        Promocode used: <code>{{ promocode }}</code>
+      </div>
+
+    </body>
+</html>

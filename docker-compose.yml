@@ -26,8 +26,8 @@ services:
     volumes:
       - rmq-data:/var/lib/rabbitmq
 
-  maildev:
-    image: maildev/maildev
+  mailcatcher:
+    image: schickling/mailcatcher
     ports:
       - "1025:1025"
       - "1080:1080"
@@ -35,3 +35,10 @@ services:
 volumes:
   db-data:
   rmq-data:
+
+
+#  maildev:
+#    image: maildev/maildev
+#    ports:
+#      - "1025:1025"
+#      - "1080:1080"

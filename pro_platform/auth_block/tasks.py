@@ -7,7 +7,6 @@ from pro_platform.settings import EMAIL_ADMIN_ADDRESS
 
 @shared_task
 def welcome_user(user_pk):
-
     user: User = User.objects.get(pk=user_pk)
 
     send_mail(
