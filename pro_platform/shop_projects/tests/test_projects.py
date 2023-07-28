@@ -1,9 +1,9 @@
-import re
-
 from django.test import TestCase
 from django.urls import reverse
 
-from shop_projects.models import Project, Donat
+from shop_projects.models import Project
+from shop_projects.tests.common_test_cases import checking_refs_details_page, checking_refs_list_page, \
+    checking_content_list_page
 
 
 class TestProjectTestCase(TestCase):
@@ -49,24 +49,7 @@ class TestProjectTestCase(TestCase):
         #######################################
         # checking refs (active functionality)
         #######################################
-        # receiving  html of response as str
-        response_content: bytes = response.content
-        response_content_str: str = response_content.decode()
-
-        # check availability "Update" project
-        update_ref = f'/shop_projects/projects/{self.project.pk}/update/'
-        count = len(re.findall(f'href="{update_ref}"', response_content_str))
-        self.assertEqual(count, 1)
-
-        # check availability "Archive" project
-        archive_ref = f'/shop_projects/projects/{self.project.pk}/confirm-delete/'
-        count = len(re.findall(f'href="{archive_ref}"', response_content_str))
-        self.assertEqual(count, 1)
-
-        # check availability back to all projects (navbar and button)
-        archive_ref = f'/shop_projects/projects'
-        count = len(re.findall(f'href="{archive_ref}"', response_content_str))
-        self.assertEqual(count, 2)
+        checking_refs_details_page(self, response, 'projects', self.project.pk)
 
 
 class ProjectsListViewTestCase(TestCase):
@@ -83,39 +66,8 @@ class ProjectsListViewTestCase(TestCase):
         url = reverse("shop_projects:projects")
         response = self.client.get(url)
 
-        ##########################
-        # checking right template
-        ##########################
-        self.assertTemplateUsed(response, "shop_projects/project_list.html")
-
-        projects_qs = (
-            Project
-            .objects
-            .filter(status=Project.Status.AVAILABLE)
-            .order_by("id")
-            .only("id")
-            .all()
-        )
-
-        ###################
         # checking content
-        ###################
-        self.assertQuerySetEqual(
-            qs=[project.pk for project in projects_qs],
-            values=(p.pk for p in response.context["object_list"]),
-        )
+        checking_content_list_page(self, response, Project, 'project', 'id')
 
-        #######################################
         # checking refs (active functionality)
-        #######################################
-        # receiving  html of response as str
-        response_content: bytes = response.content
-        response_content_str: str = response_content.decode()
-
-        # check availability "create" (navbar and button)
-        count = len(re.findall(r'href="/shop_projects/projects/create/"', response_content_str))
-        self.assertEqual(count, 2)
-
-        # check availability "back to index" ref (button)
-        count = len(re.findall(r'href="/shop_projects/"', response_content_str))
-        self.assertEqual(count, 1)
+        checking_refs_list_page(self, response, 'projects')

@@ -13,6 +13,8 @@ from shop_projects.models import Donat
 
 from django import db
 
+from shop_projects.tests.common_test_cases import checking_refs_list_page, checking_content_list_page
+
 UserModel: Type[AbstractUser] = get_user_model()
 
 
@@ -89,43 +91,12 @@ class DonatListViewTestCase(TestCase):
         # check possibility to open "donats" page
         url = reverse("shop_projects:donats")
         response = self.client.get(url)
-        self.assertEqual(response.status_code, HTTPStatus.OK)
 
-        ##########################
-        # checking right template
-        ##########################
-        self.assertTemplateUsed(response, "shop_projects/donat_list.html")
-
-        ###################
         # checking content
-        ###################
-        donats_qs = (
-            Donat
-            .objects
-            .filter(status=Donat.Status.AVAILABLE)
-            .order_by("money")
-            .select_related("user")
-            .all()
-        )
-        self.assertQuerySetEqual(
-            qs=[donat.pk for donat in donats_qs],
-            values=(p.pk for p in response.context["object_list"]),
-        )
+        checking_content_list_page(self, response, Donat, 'donat', 'money')
 
-        #######################################
         # checking refs (active functionality)
-        #######################################
-        # receiving  html of response as str
-        response_content: bytes = response.content
-        response_content_str: str = response_content.decode()
-
-        # check availability "create" (navbar and button)
-        count = len(re.findall(r'href="/shop_projects/donats/create/"', response_content_str))
-        self.assertEqual(count, 2)
-
-        # check availability "back to index" ref (button)
-        count = len(re.findall(r'href="/shop_projects/"', response_content_str))
-        self.assertEqual(count, 1)
+        checking_refs_list_page(self, response, 'donats')
 
     ##################################
     # *** checking donat-details *** #
@@ -193,7 +164,7 @@ class DonatListViewTestCase(TestCase):
         # self.assertContains(response, self.donat.created_at)
         # ' July 19, 2023, 6:01 p.m.\n  '
 
-        # checking displaying projects for checking creator
+        # checking displaying projects for checking donats
         donat_qs = (
             Donat
             .objects

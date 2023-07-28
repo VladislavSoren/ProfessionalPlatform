@@ -1,4 +1,3 @@
-import re
 import sys
 
 from django.db.models import Q
@@ -8,6 +7,8 @@ from django.urls import reverse
 from pro_platform.fake import fake
 
 from shop_projects.models import Category
+from shop_projects.tests.common_test_cases import checking_refs_details_page, checking_refs_list_page, \
+    checking_content_list_page
 
 
 class TestCategoryTestCase(TestCase):
@@ -62,7 +63,7 @@ class TestCategoryTestCase(TestCase):
         self.assertContains(response, self.category.name)
         self.assertContains(response, self.category.pk)
 
-        # checking displaying projects for checking creator
+        # checking displaying projects for checking categories
         category_qs = (
             Category
             .objects
@@ -78,24 +79,7 @@ class TestCategoryTestCase(TestCase):
         #######################################
         # checking refs (active functionality)
         #######################################
-        # receiving  html of response as str
-        response_content: bytes = response.content
-        response_content_str: str = response_content.decode()
-
-        # check availability "Update" category
-        update_ref = f'/shop_projects/categories/{self.category.pk}/update/'
-        count = len(re.findall(f'href="{update_ref}"', response_content_str))
-        self.assertEqual(count, 1)
-
-        # check availability "Archive" category
-        archive_ref = f'/shop_projects/categories/{self.category.pk}/confirm-delete/'
-        count = len(re.findall(f'href="{archive_ref}"', response_content_str))
-        self.assertEqual(count, 1)
-
-        # check availability back to all categories (navbar and button)
-        archive_ref = f'/shop_projects/categories'
-        count = len(re.findall(f'href="{archive_ref}"', response_content_str))
-        self.assertEqual(count, 2)
+        checking_refs_details_page(self, response, 'categories', self.category.pk)
 
 
 class TestCategoriesListTestCase(TestCase):
@@ -126,40 +110,8 @@ class TestCategoriesListTestCase(TestCase):
         url = reverse("shop_projects:categories")
         response = self.client.get(url)
 
-        ##########################
-        # checking right template
-        ##########################
-        self.assertTemplateUsed(response, "shop_projects/category_list.html")
-
-        categories_qs = (
-            Category
-            .objects
-            .filter(status=Category.Status.AVAILABLE)
-            .order_by("id")
-            .all()
-        )
-
-        ###################
         # checking content
-        ###################
-        # comparing  test query and response of service
-        self.assertQuerySetEqual(
-            qs=[project.pk for project in categories_qs],
-            values=(p.pk for p in response.context["object_list"]),
-        )
+        checking_content_list_page(self, response, Category, 'category', 'id')
 
-        #######################################
         # checking refs (active functionality)
-        #######################################
-        # receiving  html of response as str
-        response_content: bytes = response.content
-        response_content_str: str = response_content.decode()
-        # response_content_str = response_content_str.replace('"', '&quot;')
-
-        # check availability "create" (navbar and button)
-        count = len(re.findall(r'href="/shop_projects/categories/create/"', response_content_str))
-        self.assertEqual(count, 2)
-
-        # check availability "back to index" ref (button)
-        count = len(re.findall(r'href="/shop_projects/"', response_content_str))
-        self.assertEqual(count, 1)
+        checking_refs_list_page(self, response, 'categories')
