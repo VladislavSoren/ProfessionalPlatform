@@ -26,5 +26,6 @@ jobs:
         pip install --upgrade pip "poetry==1.5.1"
         poetry config virtualenvs.create false --local
     - name: Run Tests
+      working-directory: ./pro_platform
       run: |
-        python /pro_platform/manage.py test
+        python manage.py test
