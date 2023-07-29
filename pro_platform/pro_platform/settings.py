@@ -121,7 +121,7 @@ DATABASES = {
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': "127.0.0.1",
-        'PORT': "9999",
+        'PORT': DB_PORT_OUT,
         "TEST": {
             "NAME": "mytestdatabase",
         },

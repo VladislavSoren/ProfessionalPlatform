@@ -7,11 +7,11 @@ on:
     branches: [ "master" ]
 
 env:
-  SKIP_API_TESTS_ACTIONS: $SKIP_API_TESTS_ACTIONS
-  DB_NAME: $DB_NAME
-  DB_USER: $DB_USER
-  DB_PASSWORD: $DB_PASSWORD
-#  DB_PORT_OUT: $DB_PORT_OUT
+  SKIP_API_TESTS_ACTIONS: 1
+  DB_NAME: pro_platform
+  DB_USER: soren
+  DB_PASSWORD: pass123
+  DB_PORT_OUT: 9999
 
 jobs:
   build:
