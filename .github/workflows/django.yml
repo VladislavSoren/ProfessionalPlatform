@@ -27,4 +27,4 @@ jobs:
         poetry config virtualenvs.create false --local
     - name: Run Tests
       run: |
-        python manage.py test
+        python /pro_platform/manage.py test
