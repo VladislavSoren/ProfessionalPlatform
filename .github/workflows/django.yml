@@ -11,8 +11,8 @@ env:
   DB_NAME: ${DB_NAME}
   DB_USER:  ${DB_USER}
   DB_PASSWORD: ${DB_PASSWORD}
-  DB_PORT_OUT: ${DB_PORT_OUT}
-  DB_PORT: ${DB_PORT}
+#  DB_PORT_OUT: ${DB_PORT_OUT}
+#  DB_PORT: ${DB_PORT}
 
 jobs:
   build:
