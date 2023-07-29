@@ -1,4 +1,4 @@
 https://github.com/pavelnebel/car_numbers_detection
 https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py
-*service implemented jointly with my fellow programmer "pavelnebel"
+*service implemented jointly with my fellow programmer <a href="https://github.com/pavelnebel"> "pavelnebel"</a>
 

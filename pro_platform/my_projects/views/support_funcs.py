@@ -1,13 +1,7 @@
-def get_template_names_dict(description_dir):
-    file_description_list = [
-        ('general_description.txt', 'general_description_paras'),
-        ('service_functionality.txt', 'service_functionality_paras'),
-        ('architecture.txt', 'architecture_paras'),
-        ('project_implementation.txt', 'project_implementation_paras'),
-        ('api_description.txt', 'api_description_paras'),
-        ('links_to_source_code.txt', 'links_to_source'),
-    ]
+from my_projects.config import file_description_list, file_description_list_koncert_bot
 
+
+def get_template_names_dict(description_dir):
     template_names_dict = {}
     for filename, template_name in file_description_list:
         description_path = description_dir / filename
@@ -18,17 +12,8 @@ def get_template_names_dict(description_dir):
 
 
 def get_template_names_koncert_bot_dict(description_dir):
-    file_description_list = [
-        ('general_description.txt', 'general_description_paras'),
-        ('service_functionality.txt', 'service_functionality_paras'),
-        ('platforms.txt', 'platforms_names_urls_zip'),
-        ('architecture.txt', 'architecture_paras'),
-        ('project_implementation.txt', 'project_implementation_paras'),
-        ('service_url.txt', 'service_url'),
-    ]
-
     template_names_dict = {}
-    for filename, template_name in file_description_list:
+    for filename, template_name in file_description_list_koncert_bot:
         description_path = description_dir / filename
         with open(description_path, mode='r') as f:
 
