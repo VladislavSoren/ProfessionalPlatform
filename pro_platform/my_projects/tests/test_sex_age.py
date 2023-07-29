@@ -1,3 +1,5 @@
+import os
+
 from django.test import TestCase
 from django.urls import reverse
 
@@ -18,8 +20,12 @@ class SexAgeTryPageTestCase(TestCase):
 
 
 class SexAgeApiTestCase(TestCase):
+    SKIP_API_TESTS = os.getenv("SKIP_API_TESTS", False)
+    SKIP_API_TESTS_ACTIONS = os.getenv("SKIP_API_TESTS_ACTIONS", False)
 
     def test_api(self):
+        if self.SKIP_API_TESTS or self.SKIP_API_TESTS_ACTIONS:
+            self.skipTest("skip api tests in actions due to missing of services")
         try_page_api_testing(
             self,
             try_page_path="my_projects:sex_age_detection",

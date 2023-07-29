@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ "master" ]
 
-#env:
-#  DEBUG: ${DEBUG}
+env:
+  SKIP_API_TESTS_ACTIONS: ${SKIP_API_TESTS_ACTIONS}
 
 jobs:
   build:
