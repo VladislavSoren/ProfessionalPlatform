@@ -7,7 +7,11 @@ on:
     branches: [ "master" ]
 
 env:
-  SKIP_API_TESTS_ACTIONS: ${SKIP_API_TESTS_ACTIONS}
+  SKIP_API_TESTS_ACTIONS: 1
+  DB_NAME: ${DB_NAME}
+  DB_USER:  ${DB_USER}
+  $DB_PASSWORD: ${DB_PASSWORD}
+  DB_PORT_OUT: ${DB_PORT_OUT}
 
 jobs:
   build:
@@ -22,11 +26,11 @@ jobs:
       db:
         image: postgres
         env:
-          POSTGRES_DB:  ${DB_NAME}
-          POSTGRES_USER:  ${DB_USER}
-          POSTGRES_PASSWORD:  ${DB_PASSWORD}
+          POSTGRES_DB:  $DB_NAME
+          POSTGRES_USER:  $DB_USER
+          POSTGRES_PASSWORD:  $DB_PASSWORD
         ports:
-          -  ${DB_PORT_OUT}:5432
+          -  $DB_PORT_OUT:5432
 
     steps:
     - uses: actions/checkout@v3
