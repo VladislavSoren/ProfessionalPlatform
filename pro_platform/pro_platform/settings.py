@@ -14,7 +14,14 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 
-from config import RABBIT_USER, RABBIT_PASS
+from config import (
+    DB_NAME,
+    DB_USER,
+    DB_PASSWORD,
+    DB_PORT_OUT,
+    RABBIT_USER,
+    RABBIT_PASS,
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-%b^(@lv@i&5n8g%x9vza$c(y(bfr@g=mt=4va4cm^01&ciw_hj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv(
-    "DEBUG",
-    False,
-)
+DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -113,11 +117,11 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "pro_platform",
-        'USER': "soren",
-        'PASSWORD': "pass123",
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
         'HOST': "127.0.0.1",
-        'PORT': "9999",
+        'PORT': DB_PORT_OUT,
         "TEST": {
             "NAME": "mytestdatabase",
         },

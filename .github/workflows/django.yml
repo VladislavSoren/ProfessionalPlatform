@@ -22,11 +22,11 @@ jobs:
       db:
         image: postgres
         env:
-          POSTGRES_DB: pro_platform
-          POSTGRES_USER: soren
-          POSTGRES_PASSWORD: pass123
+          POSTGRES_DB:  ${DB_NAME}
+          POSTGRES_USER:  ${DB_USER}
+          POSTGRES_PASSWORD:  ${DB_PASSWORD}
         ports:
-          - 9999:5432
+          -  ${DB_PORT_OUT}:5432
 
     steps:
     - uses: actions/checkout@v3
