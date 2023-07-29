@@ -31,7 +31,7 @@ jobs:
           POSTGRES_USER:  $DB_USER
           POSTGRES_PASSWORD:  $DB_PASSWORD
         ports:
-          -  $DB_PORT_OUT:$DB_PORT
+          -  9999:5432
 
     steps:
     - uses: actions/checkout@v3
