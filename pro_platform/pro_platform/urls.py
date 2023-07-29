@@ -28,7 +28,7 @@ urlpatterns = [
     path('shop_projects/', include('shop_projects.urls')),
     path('my_projects/', include('my_projects.urls')),
 
-
+    path('', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

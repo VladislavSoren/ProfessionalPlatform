@@ -92,6 +92,10 @@ curl http://127.0.0.1:4666/my_projects/exercise_recognition/about/
 http http://127.0.0.1:4666/my_projects/exercise_recognition/about/
 ```
 
+Useful links:
+Django Password Reset Tutorial
+https://www.pythontutorial.net/django-tutorial/django-password-reset/
+
 Questions:
 - How config `static(settings.MEDIA_URL` in prod?
 - Django автоматически создают тестовую БД (создаёт ли для постгрес?)

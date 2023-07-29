@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block body %}
-  <h1>User info</h1>
+  <h1>User info:</h1>
   {% if user.is_authenticated %}
-    <p>Username: {{ user.username }}</p>
+    <div class="my-4">
+      <ul>
+      <li><p>Username: <code>{{ user.username }}</code></p></li>
+      <li><p>Email: <code>{{ user.email }}</code></p></li>
+    </div>
+      </ul>
+
+    <a href="{%url 'auth_block:password-reset' %}"  class="btn btn-warning">Reset password</a>
   {% else %}
     <h3>Anonymous user</h3>
   {% endif %}
