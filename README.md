@@ -1,7 +1,5 @@
 
-
 [![Build Stat](https://github.com/VladislavSoren/ProfessionalPlatform/actions/workflows/django.yml/badge.svg?event=push)](https://github.com/VladislavSoren/ProfessionalPlatform/actions/workflows/django.yml)
-
 
 # Проектная работа: `"Профессиональная платформа"`
 
@@ -16,6 +14,8 @@
 - Миграции (`alembic`)
 - Worker для отложенных задач (`Celery`)
 - Backend для хранения и поставки отложенных задач (`RabbitMQ`)
+- Сервис для отладки email рассылки (`MailCatcher`) 
+- CI для автоматического тестирования проекта при `push` или `pull_request` в ветку `master` (GitHub actions)
 
 ## Проектная реализация:
 - Запуск проекта осуществляется просто в терминале (запуск через `Docker` отлаживается)
@@ -23,12 +23,24 @@
 - `БД` запущена в `Docker` контейнере
 - `Celery` запущен в `Docker` контейнере
 - `RabbitMQ` запущен в `Docker` контейнере
+- `MailCatcher` запущен в `Docker` контейнере
+
+## Cтек технологий:
+- Языки: `Python`, `HTML`, `CSS`
+- Инструменты разработки и организации инфраструктуры: `Git`, `Github`, `Docker`, `Bash`, `PyCharm`
+- Работа с БД: `PostgresSQL`, `Alembic`, `Django ORM`
+- Отложенные задачи: `Celery`, `RabbitMQ`
+- Разработка API: `FastAPI`, `Uvicorn`, `Requests`
+- Работа с медиа: `OpenCV`, `Pillow`
+- ML: `Tensorflow`, `MXNet`, `scikit-learn`
+- Тестирование: `unittest`, `Faker`, `FactoryBoy`, `Coverage.py`
 
 ## Описание функционала приложений
 ### Блок аутентификации:
 - Возможность регистрироваться
 - Возможность логиниться
 - Возможность выйти из профиля
+- Возможность сброса пароля через почт
 
 ### Магазин проектов:
 - **User**:
@@ -37,7 +49,7 @@
       - 1to∞ c моделью `Order`
       - 1to∞ c моделью `Donat`
     - отложенные задачи:
-      - при сигнале `post_save` на `maildev` отправляется письмо, приветствующее юзера
+      - при сигнале `post_save` на `mailcatcher` отправляется письмо, приветствующее юзера
 
 - **Creator**:
     - полный функционал `CRUD`
@@ -64,7 +76,7 @@
     - сигналы:
       - `post_save` при создании/обновлении так же создаётся/обновляется `OrderPaymentDetails`
     - отложенные задачи:
-      - при сигнале `post_save` на `maildev` отправляется письмо 
+      - при сигнале `m2m_changed` на `mailcatcher` отправляется письмо с информацией о заказе и общей суммой
     - ограничения по доступу:
       - только залогинившийся пользователь имеет доступ к списку заказов
       - только юзеры уровня `staff` имеют доступ к деталям заказа
@@ -93,8 +105,10 @@
   - `try` page:
     - предсказание пола людей на изображении, загруженном юзером
     - предсказание возраста людей
+    - возможность скачать подготовленное изображение для теста сервиса
     - форма ввода, включая `ImageField`
-    - `ImageField` (планируется добавить проверки)
+    - `ImageField` валидации: 
+      - ограничение на размер загружаемого файла
     - взаимодействие с `API` сервиса `Sex-age human detection` ([Исходный код API](https://github.com/VladislavSoren/sex_age_humans_detection/blob/master/containers/sex_age_api_container/main.py))
     - вывод размеченного изображения
   - `About` page:
@@ -103,6 +117,7 @@
   - `try` page:
     - классификация физических упражнений по видео, загруженном юзером (подтягивания, приседания, отжимания на брусьях)
     - подсчет количества повторений упражнения
+    - возможность скачать подготовленное видео для теста сервиса
     - форма ввода, включая `FileField`
     - `FileField` валидации: 
       - ограничение на размер загружаемого файла
@@ -117,13 +132,14 @@
 - **car_num_det**:
   - `try` page:
     - Распознавание автомобильного номера на изображении
+    - возможность скачать подготовленное изображение для теста сервиса
     - форма ввода, включая `ImageField`
-    - `ImageField` (планируется добавить проверки)
+    - `ImageField` валидации: 
+      - ограничение на размер загружаемого файла
     - взаимодействие с `API` сервиса `Car numbers detection` ([Исходный код API](https://github.com/pavelnebel/car_numbers_detection/blob/master/containers/car_num_det_api_container/main.py))
     - вывод распознанного текста на номере и фрагмент номера, исходного изображения
   - `About` page:
     - Подробная информация о сервисе `Car numbers detection` ([Исходный код проекта](https://github.com/pavelnebel/car_numbers_detection))
-
 
 
 ## Тесты
@@ -146,6 +162,7 @@
 ### Схема тестирования `my_projects` app:
 ![testing scheme.png](README_static%2Ftesting%20scheme.png)
 
+### Coverage report: 92% (Coverage.py)
 
 
 ## Инструкция по запуску проекта

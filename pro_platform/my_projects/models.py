@@ -6,7 +6,10 @@ from .validators import validate_file_size, validate_min_number_of_frames
 
 class ImageSexAgeDetect(models.Model):
     name = models.CharField(max_length=50)
-    InputImage = models.ImageField(upload_to='images/')
+    InputImage = models.ImageField(
+        upload_to='images/',
+        validators=[validate_file_size],
+    )
 
     def __str__(self):
         return self.name
@@ -14,7 +17,10 @@ class ImageSexAgeDetect(models.Model):
 
 class ImageCarNumDetect(models.Model):
     name = models.CharField(max_length=50)
-    InputImage = models.ImageField(upload_to='images/')
+    InputImage = models.ImageField(
+        upload_to='images/',
+        validators=[validate_file_size],
+    )
 
     def __str__(self):
         return self.name
