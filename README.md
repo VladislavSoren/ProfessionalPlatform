@@ -11,7 +11,7 @@
 - Приложение `Магазин проектов` (shop_projects)
 - Приложение `Мои проекты` (my_projects)
 - БД (`PostgresSQL`) 
-- Миграции (`alembic`)
+- Миграции
 - Worker для отложенных задач (`Celery`)
 - Backend для хранения и поставки отложенных задач (`RabbitMQ`)
 - Сервис для отладки email рассылки (`MailCatcher`) 
@@ -28,7 +28,7 @@
 ## Cтек технологий:
 - Языки: `Python`, `HTML`, `CSS`
 - Инструменты разработки и организации инфраструктуры: `Git`, `Github`, `Docker`, `Bash`, `PyCharm`
-- Работа с БД: `PostgresSQL`, `Alembic`, `Django ORM`
+- Работа с БД: `PostgresSQL`, `Django ORM`
 - Отложенные задачи: `Celery`, `RabbitMQ`
 - Разработка API: `FastAPI`, `Uvicorn`, `Requests`
 - Работа с медиа: `OpenCV`, `Pillow`
