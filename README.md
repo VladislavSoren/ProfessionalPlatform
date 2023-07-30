@@ -1,6 +1,6 @@
 
 
-[![Build Stat](https://github.com/VladislavSoren/ProfessionalPlatform/actions/workflows/django.yml/badge.svg?branch=pytest_github_action)](https://github.com/VladislavSoren/ProfessionalPlatform/actions/workflows/django.yml)
+[![Build Stat](https://github.com/VladislavSoren/ProfessionalPlatform/actions/workflows/django.yml/badge.svg)](https://github.com/VladislavSoren/ProfessionalPlatform/actions/workflows/django.yml)
 
 
 # Проектная работа: `"Профессиональная платформа"`
