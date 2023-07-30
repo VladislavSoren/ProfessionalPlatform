@@ -17,6 +17,7 @@ psycopg2 = "^2.9.6"
 pillow = "^10.0.0"
 requests = "^2.31.0"
 opencv-python = "^4.8.0.74"
+coverage = "7.2.7"
 
 
 [tool.poetry.group.dev.dependencies]

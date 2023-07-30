@@ -20,8 +20,8 @@ class SexAgeTryPageTestCase(TestCase):
 
 
 class SexAgeApiTestCase(TestCase):
-    SKIP_API_TESTS = os.getenv("SKIP_API_TESTS", False)
-    SKIP_API_TESTS_ACTIONS = os.getenv("SKIP_API_TESTS_ACTIONS", False)
+    SKIP_API_TESTS = int(os.getenv("SKIP_API_TESTS", False))  # from .env returns str value
+    SKIP_API_TESTS_ACTIONS = int(os.getenv("SKIP_API_TESTS_ACTIONS", False))
 
     def test_api(self):
         if self.SKIP_API_TESTS or self.SKIP_API_TESTS_ACTIONS:

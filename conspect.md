@@ -92,6 +92,11 @@ curl http://127.0.0.1:4666/my_projects/exercise_recognition/about/
 http http://127.0.0.1:4666/my_projects/exercise_recognition/about/
 ```
 
+Display tests coverage
+```shell
+coverage run manage.py test -v 2 && coverage report
+```
+
 Useful links:
 Django Password Reset Tutorial
 https://www.pythontutorial.net/django-tutorial/django-password-reset/
