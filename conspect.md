@@ -97,6 +97,10 @@ Display tests coverage
 coverage run manage.py test -v 2 && coverage report
 ```
 
+```shell
+coverage html
+```
+
 Useful links:
 Django Password Reset Tutorial
 https://www.pythontutorial.net/django-tutorial/django-password-reset/
