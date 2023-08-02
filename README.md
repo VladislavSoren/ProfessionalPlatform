@@ -197,4 +197,3 @@ bash start_celery.sh
 ```shell 
 python manage.py test
 ```
-
