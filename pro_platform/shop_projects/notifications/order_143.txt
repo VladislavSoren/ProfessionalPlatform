@@ -1,0 +1,1 @@
+143,3, {'Exercise recognition': Decimal('300.00'), 'Koncert bot': Decimal('100.00')}

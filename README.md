@@ -197,3 +197,5 @@ bash start_celery.sh
 ```shell 
 python manage.py test
 ```
+git remote add master git@gitlab.com:otus_projects/professionalplatform.git
+
