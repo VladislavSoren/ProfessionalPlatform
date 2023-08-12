@@ -29,13 +29,22 @@ test:
     POSTGRES_USER: soren
     POSTGRES_PASSWORD: pass123
     SKIP_API_TESTS_ACTIONS: 1
+    COVERAGE_DIR: "coverage-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
 #    PGDATA: /var/lib/postgresql/data/pgdata
   script:
     - cd pro_platform
     - python manage.py migrate
-    - python manage.py test
+#    - python manage.py test
+    - coverage run manage.py test -v 2 && coverage report
+#    - coverage html
+    - coverage html -d $COVERAGE_DIR
+  artifacts:
+    name: "coverage-report-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - $COVERAGE_DIR
+    when: on_success
+    expire_in: 1 week
 
-#lint:
 #  stage: testing
 #  script:
 #    - echo "Lint done..."
