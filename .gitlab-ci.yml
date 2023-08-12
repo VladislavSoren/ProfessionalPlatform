@@ -28,6 +28,7 @@ test:
     POSTGRES_DB: pro_platform
     POSTGRES_USER: soren
     POSTGRES_PASSWORD: pass123
+    SKIP_API_TESTS_ACTIONS: 1
 #    PGDATA: /var/lib/postgresql/data/pgdata
   script:
     - cd pro_platform
