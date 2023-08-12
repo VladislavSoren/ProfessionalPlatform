@@ -1,11 +1,14 @@
 image: python:3.10
 
 before_script:
-
+  # install dependencies for cv2
   - apt-get update && apt-get install libgl1 -y
   - apt-get install libopenblas-dev -y
 
+  # check python version
   - python --version
+
+  # install all project dependencies
   - pip install --upgrade pip "poetry==1.5.1"
   - poetry config virtualenvs.create false --local
   - poetry install --no-ansi
@@ -19,8 +22,16 @@ stages:
 
 test:
   stage: testing
+  services:
+    - postgres
+  variables:
+    POSTGRES_DB: pro_platform
+    POSTGRES_USER: soren
+    POSTGRES_PASSWORD: pass123
+#    PGDATA: /var/lib/postgresql/data/pgdata
   script:
     - cd pro_platform
+    - python manage.py migrate
     - python manage.py test
 
 #lint:
