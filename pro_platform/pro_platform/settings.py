@@ -123,7 +123,7 @@ DATABASES = {
         'USER': 'soren',
         'PASSWORD': 'pass123',
         'HOST': "postgres",
-        'PORT': '9999',
+        'PORT': '5432',
         "TEST": {
             "NAME": "mytestdatabase",
         },
