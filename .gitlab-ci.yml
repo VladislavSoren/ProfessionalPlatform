@@ -1,6 +1,10 @@
 image: python:3.10
 
 before_script:
+
+  - apt-get update && apt-get install libgl1 -y
+  - apt-get install libopenblas-dev -y
+
   - python --version
   - pip install --upgrade pip "poetry==1.5.1"
   - poetry config virtualenvs.create false --local
