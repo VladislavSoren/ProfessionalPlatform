@@ -101,6 +101,16 @@ coverage run manage.py test -v 2 && coverage report
 coverage html
 ```
 
+Gitlab worker
+
+sudo gitlab-runner start
+
+gitlab-runner register
+
+```shell
+gitlab-runner run
+```
+
 Useful links:
 Django Password Reset Tutorial
 https://www.pythontutorial.net/django-tutorial/django-password-reset/
