@@ -41,7 +41,8 @@ test:
   artifacts:
     name: "coverage-report-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
     paths:
-      - $COVERAGE_DIR
+      - /builds/otus_projects/professionalplatform/pro_platform/$COVERAGE_DIR
+#      - $COVERAGE_DIR
     when: on_success
     expire_in: 1 week
 
