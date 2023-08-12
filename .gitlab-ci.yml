@@ -10,26 +10,26 @@ before_script:
 # List of stages for jobs, and their order of execution
 stages:
   - testing
-  - build
-  - deploy
+#  - build
+#  - deploy
 
 test:
   stage: testing
   script:
-    - echo "Test done..."
+    - cd pro_platform
+    - python manage.py test
 
-lint:
-  stage: testing
-  script:
-    - echo "Lint done..."
-
-
-make-build:
-  stage: build
-  script:
-    - echo "Make build..."
-
-deploy:
-  stage: deploy
-  script:
-    - echo "Deploy ..."
+#lint:
+#  stage: testing
+#  script:
+#    - echo "Lint done..."
+#
+#make-build:
+#  stage: build
+#  script:
+#    - echo "Make build..."
+#
+#deploy:
+#  stage: deploy
+#  script:
+#    - echo "Deploy ..."
