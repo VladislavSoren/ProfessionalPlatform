@@ -26,17 +26,55 @@ SQLALCHEMY_DATABASE_URI = os.getenv(
 class Config(object):
     TESTING = False
     DEBUG = False
-    SECRET_KEY = "7ec26d07b86e8204645c637dacf21be3"
+    # SECRET_KEY = "7ec26d07b86e8204645c637dacf21be3"
     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
 
 
 class ProductionConfig(Config):
-    SECRET_KEY = "f260e09979ef96ce87ed16afdd2dc77b"
+    ...
+    # SECRET_KEY = "f260e09979ef96ce87ed16afdd2dc77b"
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    DATABASES_CONFIG_DICT = \
+        {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': DB_NAME,
+                'USER': DB_USER,
+                'PASSWORD': DB_PASSWORD,
+                'HOST': "127.0.0.1",
+                'PORT': DB_PORT_OUT,
+                "TEST": {
+                    "NAME": "mytestdatabase",
+                },
+            }
+        }
 
 
 class TestingConfig(Config):
     TESTING = True
+    DATABASES_CONFIG_DICT = \
+        {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'pro_platform',
+                'USER': 'soren',
+                'PASSWORD': 'pass123',
+                'HOST': "postgres",
+                'PORT': '5432',
+                "TEST": {
+                    "NAME": "mytestdatabase",
+                },
+            }
+        }
+
+
+config_class_name = os.getenv("CONFIG_CLASS", "DevelopmentConfig")
+if config_class_name == 'ProductionConfig':
+    CONFIG_OBJECT = ProductionConfig
+elif config_class_name == 'DevelopmentConfig':
+    CONFIG_OBJECT = DevelopmentConfig
+elif config_class_name == 'TestingConfig':
+    CONFIG_OBJECT = TestingConfig

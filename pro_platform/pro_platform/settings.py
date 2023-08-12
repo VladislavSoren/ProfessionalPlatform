@@ -14,11 +14,8 @@ from config import (
     DB_PORT_OUT,
     RABBIT_USER,
     RABBIT_PASS,
+    CONFIG_OBJECT,
 )
-
-config_class_name = os.getenv("CONFIG_CLASS", "DevelopmentConfig")
-config_object = f'config.{config_class_name}'
-# app.config.from_object(config_object)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,29 +103,26 @@ WSGI_APPLICATION = "pro_platform.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
+DATABASES = CONFIG_OBJECT.DATABASES_CONFIG_DICT
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': DB_NAME,
-        # 'USER': DB_USER,
-        # 'PASSWORD': DB_PASSWORD,
-        # 'HOST': "127.0.0.1",
-        # 'PORT': DB_PORT_OUT,
-        'NAME': 'pro_platform',
-        'USER': 'soren',
-        'PASSWORD': 'pass123',
-        'HOST': "postgres",
-        'PORT': '5432',
-        "TEST": {
-            "NAME": "mytestdatabase",
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         # 'NAME': DB_NAME,
+#         # 'USER': DB_USER,
+#         # 'PASSWORD': DB_PASSWORD,
+#         # 'HOST': "127.0.0.1",
+#         # 'PORT': DB_PORT_OUT,
+#         'NAME': 'pro_platform',
+#         'USER': 'soren',
+#         'PASSWORD': 'pass123',
+#         'HOST': "postgres",
+#         'PORT': '5432',
+#         "TEST": {
+#             "NAME": "mytestdatabase",
+#         },
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -171,7 +165,6 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 ####################
 # mailing list setup
