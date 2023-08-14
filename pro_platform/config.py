@@ -74,7 +74,7 @@ class TestingConfig(Config):
                 'ENGINE': 'django.db.backends.postgresql',
                 'NAME': 'pro_platform',
                 'USER': 'soren',
-                'PASSWORD': 'pass12345',
+                'PASSWORD': 'pass123',
                 'HOST': "postgres",
                 'PORT': '5432',
                 "TEST": {
