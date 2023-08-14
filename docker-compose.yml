@@ -21,7 +21,7 @@ services:
       - 8000
     depends_on:
       - pg
-#
+
 #  nginx:
 #    build: ./nginx
 ##    restart: always
@@ -48,17 +48,17 @@ services:
 #    ports:
 #      - 8008:8000
 #
-#  pg:
-#    image: postgres
-#    environment:
-#      POSTGRES_DB: ${DB_NAME}
-#      POSTGRES_USER: ${DB_USER}
-#      POSTGRES_PASSWORD: ${DB_PASSWORD}
-#      PGDATA: /var/lib/postgresql/data/pgdata
-#    ports:
-#      - "${DB_PORT_OUT}:${DB_PORT}"
-#    volumes:
-#      - db-data:/var/lib/postgresql/data/
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${DB_PORT_OUT}:${DB_PORT}"
+    volumes:
+      - db-data:/var/lib/postgresql/data/
 #
 #  rabbitmq:
 #    image: rabbitmq:3-management
@@ -78,7 +78,7 @@ services:
 #      - "1080:1080"
 
 volumes:
-#  db-data:
+  db-data:
 #  rmq-data:
   static_volume:
   media_volume:
