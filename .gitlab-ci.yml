@@ -57,17 +57,17 @@ make-build:
     DOCKER_TLS_CERTDIR: ""
   before_script:
     - docker info
-#    - apk add --no-cache docker-compose
-#    - echo "test variable"
-#    - echo $DOCKER_HUB_PASSWORD
-#    - echo "test variable end"
-#    - docker login -u vladislavsoren -p $DOCKER_HUB_PASSWORD
+    - apk add --no-cache docker-compose
+    - echo "test variable"
+    - echo $DOCKER_HUB_PASSWORD
+    - echo "test variable end"
+    - docker login -u vladislavsoren -p $DOCKER_HUB_PASSWORD
   script:
     - echo "make build ..."
-#    - docker-compose pull app || true
-#    - docker-compose build app
-#    - docker-compose push app
-#    - echo "success build and push"
+    - docker-compose pull app || true
+    - docker-compose build app
+    - docker-compose push app
+    - echo "success build and push"
 
 
 #deploy:
