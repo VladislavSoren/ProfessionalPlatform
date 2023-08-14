@@ -55,6 +55,15 @@ make-build:
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
+    SECRET_KEY: ${SECRET_KEY}
+    CONFIG_CLASS: ProductionConfig
+    POSTGRES_DB: ${DB_NAME}
+    POSTGRES_USER: ${DB_USER}
+    POSTGRES_PASSWORD: ${DB_PASSWORD}
+    DB_PORT: ${DB_PORT}
+    DB_PORT_OUT: ${DB_PORT_OUT}
+    NGINX_PORT: ${NGINX_PORT}
+
   before_script:
     - docker info
     - apk add --no-cache docker-compose
