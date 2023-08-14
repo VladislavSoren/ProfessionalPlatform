@@ -25,6 +25,7 @@ test:
   services:
     - postgres
   variables:
+    SECRET_KEY: ${SECRET_KEY}
     POSTGRES_DB: pro_platform
     POSTGRES_USER: soren
     POSTGRES_PASSWORD: pass123
