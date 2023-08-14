@@ -4,7 +4,7 @@ import unittest
 from django.test import TestCase
 from django.urls import reverse
 
-from my_projects.config import API_CAR_NUM_URL
+from config import CONFIG_OBJECT
 from my_projects.forms import ImageCarNumDetectForm
 from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing, about_page_check_content, \
     about_page_check_refs
@@ -30,7 +30,7 @@ class CarNumApiTestCase(TestCase):
         try_page_api_testing(
             self,
             try_page_path="my_projects:car_num_detection",
-            api_url=API_CAR_NUM_URL,
+            api_url=CONFIG_OBJECT.API_CAR_NUM_URL,
             path_test_file="images/img_car_num.jpeg",
             input_file_field_name="InputImage",
             success_text="Detected car number",

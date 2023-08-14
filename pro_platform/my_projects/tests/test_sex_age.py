@@ -3,7 +3,7 @@ import os
 from django.test import TestCase
 from django.urls import reverse
 
-from my_projects.config import API_SEX_AGE_URL
+from config import CONFIG_OBJECT
 from my_projects.forms import ImageSexAgeDetectForm
 from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing, about_page_check_content, \
     about_page_check_refs
@@ -29,7 +29,7 @@ class SexAgeApiTestCase(TestCase):
         try_page_api_testing(
             self,
             try_page_path="my_projects:sex_age_detection",
-            api_url=API_SEX_AGE_URL,
+            api_url=CONFIG_OBJECT.API_SEX_AGE_URL,
             path_test_file="images/img_sex_age.jpg",
             input_file_field_name="InputImage",
             success_text="Sex-age detection result",

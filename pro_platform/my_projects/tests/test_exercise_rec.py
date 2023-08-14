@@ -3,7 +3,7 @@ import os
 from django.test import TestCase
 from django.urls import reverse
 
-from my_projects.config import API_EX_REC_URL
+from config import CONFIG_OBJECT
 from my_projects.forms import VideoExerciseRecForm
 from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing, about_page_check_content, \
     about_page_check_refs
@@ -30,7 +30,7 @@ class ExRecApiTestCase(TestCase):
         try_page_api_testing(
             self,
             try_page_path="my_projects:exercise_recognition",
-            api_url=API_EX_REC_URL,
+            api_url=CONFIG_OBJECT.API_EX_REC_URL,
             path_test_file="videos/pull_ups_2.mp4",
             input_file_field_name="InputVideo",
             success_text="Exercise recognition result",
