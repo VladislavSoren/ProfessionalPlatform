@@ -58,16 +58,16 @@ make-build:
   before_script:
     - docker info
 #    - apk add --no-cache docker-compose
-    - echo "test variable"
-    - echo $DOCKER_HUB_PASSWORD
-    - echo "test variable end"
-    - docker login -u vladislavsoren -p $DOCKER_HUB_PASSWORD
-  script:
-    - echo "make build ..."
-    - docker compose pull web || true
-    - docker compose build web
-    - docker compose push web
-    - echo "success build and push"
+#    - echo "test variable"
+#    - echo $DOCKER_HUB_PASSWORD
+#    - echo "test variable end"
+#    - docker login -u vladislavsoren -p $DOCKER_HUB_PASSWORD
+#  script:
+#    - echo "make build ..."
+#    - docker-compose pull app || true
+#    - docker-compose build app
+#    - docker-compose push app
+#    - echo "success build and push"
 
 
 #deploy:
