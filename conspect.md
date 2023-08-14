@@ -87,7 +87,7 @@ python manage.py dumpdata auth.user  > shop_projects/fixtures/user-fix.json
 curl http://127.0.0.1:4666/my_projects/exercise_recognition/about/
 ```
 
-Получить ответ с данного адреса в консоль (через http лучше)
+Получить ответ с данного адреса в консол (через http лучше)
 ```shell
 http http://127.0.0.1:4666/my_projects/exercise_recognition/about/
 ```
@@ -111,10 +111,56 @@ gitlab-runner register
 gitlab-runner run
 ```
 
+show ubuntu used memory
+```shell
+df -h
+````
+
+### Docker commands
+docker used memory
+```shell
+docker system df
+docker ps --size
+```
+
+find container by name
+```shell
+docker ps | grep "some_name"
+```
+drop container and image
+```shell
+docker stop {id container}
+docker container rm {id container}
+docker rmi {id image}
+```
+
+```shell
+# Docker remove <none> TAG images
+docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}')
+# remove unused images
+docker image prune -a 
+````
+docker builder prune: Remove build cache
+```shell
+docker builder prune
+```
+
+
 Useful links:
 Django Password Reset Tutorial
 https://www.pythontutorial.net/django-tutorial/django-password-reset/
+get sorted content of "sda3" dir to txt file:
+https://translated.turbopages.org/proxy_u/en-ru.ru.f2b00d3f-64d906ff-40d550e5-74722d776562/https/stackoverflow.com/questions/69085105/how-to-empty-dev-sda3-in-linux
+```
+mkdir /mnt/root
+mount --bind / /mnt/root 
+sudo su
+du /mnt/root | sort -u -n > /mnt/bigfiles.txt
+```
 
 Questions:
 - How config `static(settings.MEDIA_URL` in prod?
 - Django автоматически создают тестовую БД (создаёт ли для постгрес?)
+
+# Dockerhub
+dckr_pat_FNvIr9tb5bi0AQfC9tduxGmLvM8

@@ -5,7 +5,7 @@ import os
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
-from my_projects.config import API_SEX_AGE_URL
+from config import CONFIG_OBJECT
 from my_projects.forms import ImageSexAgeDetectForm
 
 from PIL import Image
@@ -61,7 +61,7 @@ def image_request(request):
             json_out['image_name'] = image_name
 
             # sending image to service and receiving  response with tagged image
-            json_input: dict = get_prediction_by_req(f'{API_SEX_AGE_URL}/image', json_out)
+            json_input: dict = get_prediction_by_req(f'{CONFIG_OBJECT.API_SEX_AGE_URL}/image', json_out)
 
             #  deserialization
             image_bytes = base64.b64decode(json_input["tagged_image"])

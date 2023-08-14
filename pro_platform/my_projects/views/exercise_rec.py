@@ -5,7 +5,7 @@ import os
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
-from my_projects.config import API_EX_REC_URL
+from config import CONFIG_OBJECT
 from my_projects.forms import VideoExerciseRecForm
 
 from PIL import Image
@@ -61,7 +61,7 @@ def video_request(request):
             json_out['video_name'] = video_name
 
             # sending video to service and receiving  response with tagged video
-            json_input: dict = get_prediction_by_req(f'{API_EX_REC_URL}/video', json_out)
+            json_input: dict = get_prediction_by_req(f'{CONFIG_OBJECT.API_EX_REC_URL}/video', json_out)
 
             #  deserialization
             pred_type = json_input['pred_type']

@@ -12,22 +12,11 @@ DB_PORT_OUT = os.getenv('DB_PORT_OUT')
 RABBIT_USER = os.getenv('RABBIT_USER')
 RABBIT_PASS = os.getenv('RABBIT_PASS')
 
-# BASE_DIR = Path(__file__).resolve().parent
-# DB_FILE = BASE_DIR / "app.db"
-
-DEFAULT_DB_URL = "postgresql+psycopg2://username:passwd@0.0.0.0:9999/blog"
-
-SQLALCHEMY_DATABASE_URI = os.getenv(
-    "SQLALCHEMY_DATABASE_URI",
-    DEFAULT_DB_URL,
-)
-
 
 class Config(object):
     TESTING = False
     DEBUG = False
     # SECRET_KEY = "7ec26d07b86e8204645c637dacf21be3"
-    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
 
 
 class ProductionConfig(Config):
@@ -35,7 +24,7 @@ class ProductionConfig(Config):
     # SECRET_KEY = "f260e09979ef96ce87ed16afdd2dc77b"
 
 
-class DevelopmentConfig(Config):
+class DevelopmentConfigLocal(Config):
     DEBUG = True
     DATABASES_CONFIG_DICT = \
         {
@@ -51,6 +40,30 @@ class DevelopmentConfig(Config):
                 },
             }
         }
+    API_SEX_AGE_URL = "http://127.0.0.1:4888"
+    API_EX_REC_URL = "http://127.0.0.1:4777"
+    API_CAR_NUM_URL = "http://127.0.0.1:4999"
+
+
+class DevelopmentConfigDocker(Config):
+    DEBUG = True
+    DATABASES_CONFIG_DICT = \
+        {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': DB_NAME,
+                'USER': DB_USER,
+                'PASSWORD': DB_PASSWORD,
+                'HOST': "pg",
+                'PORT': '5432',
+                "TEST": {
+                    "NAME": "mytestdatabase",
+                },
+            }
+        }
+    API_SEX_AGE_URL = "http://10.100.100.200:4888"
+    API_EX_REC_URL = "http://10.100.100.200:4777"
+    API_CAR_NUM_URL = "http://10.100.100.200:4999"
 
 
 class TestingConfig(Config):
@@ -61,7 +74,7 @@ class TestingConfig(Config):
                 'ENGINE': 'django.db.backends.postgresql',
                 'NAME': 'pro_platform',
                 'USER': 'soren',
-                'PASSWORD': 'pass123',
+                'PASSWORD': 'pass12345',
                 'HOST': "postgres",
                 'PORT': '5432',
                 "TEST": {
@@ -74,7 +87,11 @@ class TestingConfig(Config):
 config_class_name = os.getenv("CONFIG_CLASS", "DevelopmentConfig")
 if config_class_name == 'ProductionConfig':
     CONFIG_OBJECT = ProductionConfig
-elif config_class_name == 'DevelopmentConfig':
-    CONFIG_OBJECT = DevelopmentConfig
+elif config_class_name == 'DevelopmentConfigLocal':
+    CONFIG_OBJECT = DevelopmentConfigLocal
+elif config_class_name == 'DevelopmentConfigDocker':
+    CONFIG_OBJECT = DevelopmentConfigDocker
 elif config_class_name == 'TestingConfig':
     CONFIG_OBJECT = TestingConfig
+else:
+    CONFIG_OBJECT = DevelopmentConfigLocal
