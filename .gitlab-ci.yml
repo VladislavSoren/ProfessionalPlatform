@@ -16,33 +16,33 @@ before_script:
 
 # List of stages for jobs, and their order of execution
 stages:
-#  - testing
+  - testing
   - build
 #  - deploy
 
-#test:
-#  stage: testing
-#  services:
-#    - postgres
-#  variables:
-#    SECRET_KEY: ${SECRET_KEY}
-#    POSTGRES_DB: pro_platform
-#    POSTGRES_USER: soren
-#    POSTGRES_PASSWORD: ${DB_PASSWORD}
-#    CONFIG_CLASS: TestingConfig
-#    SKIP_API_TESTS_ACTIONS: 1
-#    COVERAGE_DIR: "coverage-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
-#  script:
-#    - cd pro_platform
-#    - python manage.py migrate
-#    - coverage run manage.py test -v 2 && coverage report
-#    - coverage html -d $COVERAGE_DIR
-#  artifacts:
-#    name: "coverage-report-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
-#    paths:
-#      - /builds/otus_projects/professionalplatform/pro_platform/$COVERAGE_DIR
-#    when: on_success
-#    expire_in: 1 week
+test:
+  stage: testing
+  services:
+    - postgres
+  variables:
+    SECRET_KEY: ${SECRET_KEY}
+    POSTGRES_DB: pro_platform
+    POSTGRES_USER: soren
+    POSTGRES_PASSWORD: ${DB_PASSWORD}
+    CONFIG_CLASS: TestingConfig
+    SKIP_API_TESTS_ACTIONS: 1
+    COVERAGE_DIR: "coverage-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+  script:
+    - cd pro_platform
+    - python manage.py migrate
+    - coverage run manage.py test -v 2 && coverage report
+    - coverage html -d $COVERAGE_DIR
+  artifacts:
+    name: "coverage-report-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - /builds/otus_projects/professionalplatform/pro_platform/$COVERAGE_DIR
+    when: on_success
+    expire_in: 1 week
 
 
 make-build:
