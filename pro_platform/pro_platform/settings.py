@@ -8,10 +8,6 @@ from pathlib import Path
 from django.urls import reverse_lazy
 
 from config import (
-    DB_NAME,
-    DB_USER,
-    DB_PASSWORD,
-    DB_PORT_OUT,
     RABBIT_USER,
     RABBIT_PASS,
     CONFIG_OBJECT,
@@ -105,25 +101,6 @@ WSGI_APPLICATION = "pro_platform.wsgi.application"
 
 DATABASES = CONFIG_OBJECT.DATABASES_CONFIG_DICT
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         # 'NAME': DB_NAME,
-#         # 'USER': DB_USER,
-#         # 'PASSWORD': DB_PASSWORD,
-#         # 'HOST': "127.0.0.1",
-#         # 'PORT': DB_PORT_OUT,
-#         'NAME': 'pro_platform',
-#         'USER': 'soren',
-#         'PASSWORD': 'pass123',
-#         'HOST': "postgres",
-#         'PORT': '5432',
-#         "TEST": {
-#             "NAME": "mytestdatabase",
-#         },
-#     }
-# }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -157,9 +134,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static/"),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static/"),
+# )
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

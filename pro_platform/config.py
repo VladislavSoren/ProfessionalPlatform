@@ -20,8 +20,23 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    ...
-    # SECRET_KEY = "f260e09979ef96ce87ed16afdd2dc77b"
+    DATABASES_CONFIG_DICT = \
+        {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': DB_NAME,
+                'USER': DB_USER,
+                'PASSWORD': DB_PASSWORD,
+                'HOST': "pg",
+                'PORT': '5432',
+                "TEST": {
+                    "NAME": "mytestdatabase",
+                },
+            }
+        }
+    API_SEX_AGE_URL = "http://109.201.65.62:4888"
+    API_EX_REC_URL = "http://109.201.65.62:4777"
+    API_CAR_NUM_URL = "http://109.201.65.62:4999"
 
 
 class DevelopmentConfigLocal(Config):

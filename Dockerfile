@@ -20,5 +20,7 @@ COPY poetry.lock pyproject.toml ./
 # install project dependencies
 RUN poetry install --no-ansi
 
+RUN pip install 'gunicorn==21.2.0'
+
 # copy all not .dockerignore files in WORKDIR
 COPY pro_platform .

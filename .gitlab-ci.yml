@@ -17,7 +17,7 @@ before_script:
 # List of stages for jobs, and their order of execution
 stages:
   - testing
-#  - build
+  - build
 #  - deploy
 
 test:
@@ -28,7 +28,7 @@ test:
     SECRET_KEY: ${SECRET_KEY}
     POSTGRES_DB: pro_platform
     POSTGRES_USER: soren
-    POSTGRES_PASSWORD: pass123
+    POSTGRES_PASSWORD: ${DB_PASSWORD}
     CONFIG_CLASS: TestingConfig
     SKIP_API_TESTS_ACTIONS: 1
     COVERAGE_DIR: "coverage-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
@@ -44,15 +44,32 @@ test:
     when: on_success
     expire_in: 1 week
 
-#  stage: testing
-#  script:
-#    - echo "Lint done..."
-#
-#make-build:
-#  stage: build
-#  script:
-#    - echo "Make build..."
-#
+
+make-build:
+  stage: build
+  image: docker:20.10.16
+  only:
+    - master
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - docker info
+    - apk add --no-cache docker-compose
+    - echo "test variable"
+    - echo $DOCKER_HUB_PASSWORD
+    - echo "test variable end"
+    - docker login -u vladislavsoren -p $DOCKER_HUB_PASSWORD
+  script:
+    - echo "make build ..."
+    - docker-compose pull web || true
+    - docker-compose build web
+    - docker-compose push web
+    - echo "success build and push"
+
+
 #deploy:
 #  stage: deploy
 #  script:
