@@ -21,64 +21,64 @@ services:
       - 8000
     depends_on:
       - pg
-
-  nginx:
-    build: ./nginx
-#    restart: always
-    ports:
-      - ${NGINX_PORT}:80
-    volumes:
-      - static_volume:/code/static
-      - media_volume:/code/media
-    depends_on:
-      - web
-
-
-  web-dev:
-    environment:
-      CONFIG_CLASS: DevelopmentConfigDocker
-    # build Dockerfile from root dir
-    build: .
-    # run server
-    command: python /code/pro_platform/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
-    env_file:
-      - ./.env
-    ports:
-      - 8008:8000
-
-  pg:
-    image: postgres
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      PGDATA: /var/lib/postgresql/data/pgdata
-    ports:
-      - "${DB_PORT_OUT}:${DB_PORT}"
-    volumes:
-      - db-data:/var/lib/postgresql/data/
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASS}
-    ports:
-      - "5672:5672"
-      - "8080:15672"
-    volumes:
-      - rmq-data:/var/lib/rabbitmq
-
-  mailcatcher:
-    image: schickling/mailcatcher
-    ports:
-      - "1025:1025"
-      - "1080:1080"
+#
+#  nginx:
+#    build: ./nginx
+##    restart: always
+#    ports:
+#      - ${NGINX_PORT}:80
+#    volumes:
+#      - static_volume:/code/static
+#      - media_volume:/code/media
+#    depends_on:
+#      - web
+#
+#
+#  web-dev:
+#    environment:
+#      CONFIG_CLASS: DevelopmentConfigDocker
+#    # build Dockerfile from root dir
+#    build: .
+#    # run server
+#    command: python /code/pro_platform/manage.py runserver 0.0.0.0:8000
+#    volumes:
+#      - .:/code
+#    env_file:
+#      - ./.env
+#    ports:
+#      - 8008:8000
+#
+#  pg:
+#    image: postgres
+#    environment:
+#      POSTGRES_DB: ${DB_NAME}
+#      POSTGRES_USER: ${DB_USER}
+#      POSTGRES_PASSWORD: ${DB_PASSWORD}
+#      PGDATA: /var/lib/postgresql/data/pgdata
+#    ports:
+#      - "${DB_PORT_OUT}:${DB_PORT}"
+#    volumes:
+#      - db-data:/var/lib/postgresql/data/
+#
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    environment:
+#      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
+#      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASS}
+#    ports:
+#      - "5672:5672"
+#      - "8080:15672"
+#    volumes:
+#      - rmq-data:/var/lib/rabbitmq
+#
+#  mailcatcher:
+#    image: schickling/mailcatcher
+#    ports:
+#      - "1025:1025"
+#      - "1080:1080"
 
 volumes:
-  db-data:
-  rmq-data:
+#  db-data:
+#  rmq-data:
   static_volume:
   media_volume:
