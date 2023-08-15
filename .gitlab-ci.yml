@@ -41,7 +41,8 @@ test:
     name: "coverage-report-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
     paths:
 #      - /builds/otus_projects/professionalplatform/pro_platform/$COVERAGE_DIR
-      - /builds/public_group65433/professionalplatform_puplic_new/$COVERAGE_DIR
+#      - /builds/public_group65433/professionalplatform_puplic_new/$COVERAGE_DIR
+      - $COVERAGE_DIR
     when: on_success
     expire_in: 1 week
 
