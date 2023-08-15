@@ -163,4 +163,5 @@ Questions:
 - Django автоматически создают тестовую БД (создаёт ли для постгрес?)
 
 # Dockerhub
-dckr_pat_FNvIr9tb5bi0AQfC9tduxGmLvM8
+git remote add origin git@gitlab.com:public_group65433/professionalplatform_puplic_new.git
+git push --set-upstream origin --all
