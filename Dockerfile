@@ -24,3 +24,11 @@ RUN pip install 'gunicorn==21.2.0'
 
 # copy all not .dockerignore files in WORKDIR
 COPY pro_platform .
+RUN pwd
+RUN ls
+
+COPY prestart.sh .
+RUN chmod +x ./prestart.sh
+ENTRYPOINT ["./prestart.sh"]
+
+CMD celery -A pro_platform worker -l INFO --detach; gunicorn pro_platform.wsgi:application --bind 0.0.0.0:8000

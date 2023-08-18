@@ -8,8 +8,6 @@ from pathlib import Path
 from django.urls import reverse_lazy
 
 from config import (
-    RABBIT_USER,
-    RABBIT_PASS,
     CONFIG_OBJECT,
 )
 
@@ -23,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", False)
+DEBUG = CONFIG_OBJECT.DEBUG
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -33,17 +31,16 @@ ALLOWED_HOSTS = [
     "109.201.65.62",
 ]
 
+CSRF_TRUSTED_ORIGINS = CONFIG_OBJECT.CSRF_TRUSTED_ORIGINS
+
 # "security" filter, allowing Django to know whether it is OK (or not)
 # to disclose sensitive information within its requests and Debug information output
 INTERNAL_IPS = [
-    # ...
     "127.0.0.1",
     # "0.0.0.0",  # not very reliable
-    # ...
 ]
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -134,10 +131,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "static/"),
-# )
-# STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
@@ -161,7 +154,7 @@ EMAIL_USE_SSL = None
 EMAIL_TIMEOUT = None
 
 if DEBUG:
-    EMAIL_HOST = 'localhost'
+    EMAIL_HOST = CONFIG_OBJECT.EMAIL_HOST
     EMAIL_PORT = 1025
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = False
@@ -171,14 +164,13 @@ EMAIL_ADMIN_ADDRESS = "soren@admin.com"
 ########
 # Celery
 ########
-
 # Celery Configuration Options
 CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 15 * 60
 
 # backend
-CELERY_BROKER_URL = f"amqp://{RABBIT_USER}:{RABBIT_PASS}@localhost:5672"
+CELERY_BROKER_URL = CONFIG_OBJECT.CELERY_BROKER_URL
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
 

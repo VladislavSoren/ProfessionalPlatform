@@ -145,6 +145,10 @@ docker builder prune: Remove build cache
 docker builder prune
 ```
 
+find all celery processes
+```shell
+ps aux | grep celery
+```
 
 Useful links:
 Django Password Reset Tutorial

@@ -1,5 +1,4 @@
 from dotenv import load_dotenv, find_dotenv
-from pathlib import Path
 import os
 
 # Конфиденциальные данные
@@ -17,9 +16,14 @@ class Config(object):
     TESTING = False
     DEBUG = False
     # SECRET_KEY = "7ec26d07b86e8204645c637dacf21be3"
+    CSRF_TRUSTED_ORIGINS = []
+    CELERY_BROKER_URL = f"amqp://{RABBIT_USER}:{RABBIT_PASS}@localhost:5672"
+    EMAIL_HOST = 'localhost'
 
 
 class ProductionConfig(Config):
+    # DEBUG = True
+    CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:1337']
     DATABASES_CONFIG_DICT = \
         {
             'default': {
@@ -34,9 +38,11 @@ class ProductionConfig(Config):
                 },
             }
         }
-    API_SEX_AGE_URL = "http://109.201.65.62:4888"
-    API_EX_REC_URL = "http://109.201.65.62:4777"
-    API_CAR_NUM_URL = "http://109.201.65.62:4999"
+    CELERY_BROKER_URL = f"amqp://{RABBIT_USER}:{RABBIT_PASS}@rabbitmq:5672"
+    EMAIL_HOST = 'mailcatcher'
+    API_SEX_AGE_URL = "http://10.100.100.200:4888"
+    API_EX_REC_URL = "http://10.100.100.200:4777"
+    API_CAR_NUM_URL = "http://10.100.100.200:4999"
 
 
 class DevelopmentConfigLocal(Config):
@@ -99,7 +105,7 @@ class TestingConfig(Config):
         }
 
 
-config_class_name = os.getenv("CONFIG_CLASS", "DevelopmentConfig")
+config_class_name = os.getenv("CONFIG_CLASS", "DevelopmentConfigLocal")
 if config_class_name == 'ProductionConfig':
     CONFIG_OBJECT = ProductionConfig
 elif config_class_name == 'DevelopmentConfigLocal':
