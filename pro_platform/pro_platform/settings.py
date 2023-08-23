@@ -27,7 +27,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "0.0.0.0",
     "10.100.100.200",
-    "192.168.32.1",
     "109.201.65.62",
 ]
 
@@ -131,7 +130,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
+
+if CONFIG_OBJECT.__name__ == 'DevelopmentConfigLocal':
+    STATICFILES_DIRS = (
+        BASE_DIR / "static",
+    )
+else:
+    STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -145,15 +150,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # Production
-EMAIL_HOST = None
-EMAIL_PORT = None
-EMAIL_HOST_USER = None
-EMAIL_HOST_PASSWORD = None
-EMAIL_USE_TLS = None
-EMAIL_USE_SSL = None
-EMAIL_TIMEOUT = None
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "vlad224vlgu@gmail.com"
+EMAIL_HOST_PASSWORD = CONFIG_OBJECT.EMAIL_HOST_PASSWORD
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+# EMAIL_TIMEOUT = None
 
 if DEBUG:
+    pass
+    EMAIL_HOST_USER = None
+    EMAIL_HOST_PASSWORD = None
+    EMAIL_TIMEOUT = None
+
     EMAIL_HOST = CONFIG_OBJECT.EMAIL_HOST
     EMAIL_PORT = 1025
     EMAIL_USE_TLS = False

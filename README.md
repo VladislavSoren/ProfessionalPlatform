@@ -15,7 +15,11 @@
 - Worker для отложенных задач (`Celery`)
 - Backend для хранения и поставки отложенных задач (`RabbitMQ`)
 - Сервис для отладки email рассылки (`MailCatcher`) 
-- CI для автоматического тестирования проекта при `push` или `pull_request` в ветку `master` (GitHub actions)
+- Реальная рассылка писем на базе `Google SMTP сервера` 
+- `CI` для автоматического тестирования проекта при `push` или `pull_request` в ветку `master` (`GitHub actions`)
+- `CI/CD` в `GitLab`: 
+  - Стадия `testing`: автоматическое тестирование проекта
+  - Стадия `build`: создание продуктового образа сервиса и заливка его в `Docker Hub`
 
 ## Проектная реализация:
 - Запуск проекта осуществляется просто в терминале (запуск через `Docker` отлаживается)
@@ -27,9 +31,9 @@
 
 ## Cтек технологий:
 - Языки: `Python`, `HTML`, `CSS`
-- Инструменты разработки и организации инфраструктуры: `Git`, `Github`, `Docker`, `Bash`, `PyCharm`
+- Инструменты разработки и организации инфраструктуры: `Git`, `Github`, `GitLab`, `Docker`, `Docker Hub`, `Bash`, `PyCharm`
 - Работа с БД: `PostgresSQL`, `Django ORM`
-- Отложенные задачи: `Celery`, `RabbitMQ`
+- Отложенные задачи: `Celery`, `RabbitMQ`, `Google SMTP сервер`
 - Разработка API: `FastAPI`, `Uvicorn`, `Requests`
 - Работа с медиа: `OpenCV`, `Pillow`
 - ML: `Tensorflow`, `MXNet`, `scikit-learn`

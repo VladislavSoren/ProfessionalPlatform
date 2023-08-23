@@ -1,9 +1,6 @@
 from celery import shared_task
 from django.contrib.auth.models import User
 
-# from mail_templated import send_mail
-# from django.core.mail import send_mail as send_mail_simple
-
 from pro_platform.settings import EMAIL_ADMIN_ADDRESS
 
 from django.core.mail import EmailMessage
@@ -38,44 +35,3 @@ def notify_order_saved(order_pk, promocode, user_pk, projects_info_dict):
     path_file = f'shop_projects/notifications/order_{order_pk}.txt'
     with open(path_file, 'w') as f:
         f.write(f'{order_pk},{promocode}, {projects_info_dict}')
-
-# @shared_task
-# def notify_order_saved(order_pk, promocode, user_pk, projects_info_dict):
-#     user: User = User.objects.get(pk=user_pk)
-#
-#     # count total sum of order
-#     order_total_sum = sum(projects_info_dict.values())
-#
-#     send_mail(
-#         "email/order_updated.html",
-#         {
-#             "user": user,
-#             "order_pk": order_pk,
-#             "promocode": promocode,
-#             "projects_info_dict": projects_info_dict,
-#             "order_total_sum": order_total_sum,
-#         },
-#         EMAIL_ADMIN_ADDRESS,
-#         [user.email],
-#         fail_silently=False,
-#     )
-#
-#     # write some task args for checking if the service is alive
-#     path_file = f'shop_projects/notifications/order_{order_pk}.txt'
-#     with open(path_file, 'w') as f:
-#         f.write(f'{order_pk},{promocode}, {projects_info_dict}')
-
-
-# @shared_task
-# def notify_order_saved(order_pk, promocode, user_pk, projects_info_dict):
-#     send_mail_simple(
-#         "Subject",
-#         "Message.",
-#         "from@example.com",
-#         ["john@example.com", "jane@example.com"],
-#     )
-#
-#     # write some task args for checking if the service is alive
-#     path_file = f'shop_projects/notifications/order_{order_pk}.txt'
-#     with open(path_file, 'w') as f:
-#         f.write(f'{order_pk},{promocode}, {projects_info_dict}')

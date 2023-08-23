@@ -10,6 +10,7 @@ DB_PORT = os.getenv('DB_PORT')
 DB_PORT_OUT = os.getenv('DB_PORT_OUT')
 RABBIT_USER = os.getenv('RABBIT_USER')
 RABBIT_PASS = os.getenv('RABBIT_PASS')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 class Config(object):
@@ -19,11 +20,12 @@ class Config(object):
     CSRF_TRUSTED_ORIGINS = []
     CELERY_BROKER_URL = f"amqp://{RABBIT_USER}:{RABBIT_PASS}@localhost:5672"
     EMAIL_HOST = 'localhost'
+    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 
 
 class ProductionConfig(Config):
     # DEBUG = True
-    CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:1337', 'http://109.201.65.62:5666']
+    CSRF_TRUSTED_ORIGINS = ['http://10.100.100.200:5666', 'http://109.201.65.62:5666']
     DATABASES_CONFIG_DICT = \
         {
             'default': {

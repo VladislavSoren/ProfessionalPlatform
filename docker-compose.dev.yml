@@ -28,7 +28,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data/
 
-  rabbitmq:
+  rabbitmq-dev:
     image: rabbitmq:3-management
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
