@@ -23,7 +23,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     # DEBUG = True
-    CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:1337']
+    CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:1337', 'http://109.201.65.62:5666']
     DATABASES_CONFIG_DICT = \
         {
             'default': {
