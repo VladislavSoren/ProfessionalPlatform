@@ -6,17 +6,27 @@ from django.core.files.storage import default_storage
 from pro_platform.settings import BASE_DIR
 
 
-def validate_file_size(value):
+def validate_max_file_size(max_limit_size_MB, value):
     filesize = value.size
-
     bytes_in_MB = 1024 * 1024
-    max_limit_size_MB = 70
     max_limit_size_bytes = max_limit_size_MB * bytes_in_MB
 
     if filesize > max_limit_size_bytes:
         raise ValidationError(f"You cannot upload file more than {max_limit_size_MB}MB")
     else:
         return value
+
+
+def validate_max_image_size(value):
+    max_limit_size_MB = 9
+
+    return validate_max_file_size(max_limit_size_MB, value)
+
+
+def validate_max_video_size(value):
+    max_limit_size_MB = 20
+
+    return validate_max_file_size(max_limit_size_MB, value)
 
 
 def validate_min_number_of_frames(value):

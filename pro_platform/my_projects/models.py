@@ -1,14 +1,12 @@
 from django.db import models
-from .validators import validate_file_size, validate_min_number_of_frames
+from .validators import validate_max_image_size, validate_max_video_size, validate_min_number_of_frames
 
-
-# Create your models here.
 
 class ImageSexAgeDetect(models.Model):
     name = models.CharField(max_length=50)
     InputImage = models.ImageField(
         upload_to='images/',
-        validators=[validate_file_size],
+        validators=[validate_max_image_size],
     )
 
     def __str__(self):
@@ -19,7 +17,7 @@ class ImageCarNumDetect(models.Model):
     name = models.CharField(max_length=50)
     InputImage = models.ImageField(
         upload_to='images/',
-        validators=[validate_file_size],
+        validators=[validate_max_image_size],
     )
 
     def __str__(self):
@@ -30,7 +28,7 @@ class VideoExerciseRec(models.Model):
     name = models.CharField(max_length=50)
     InputVideo = models.FileField(
         upload_to='videos/',
-        validators=[validate_file_size, validate_min_number_of_frames],
+        validators=[validate_max_video_size, validate_min_number_of_frames],
         null=True,
         verbose_name="")
 
