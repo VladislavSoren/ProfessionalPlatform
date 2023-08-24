@@ -26,6 +26,9 @@
 - HTTP-сервер: nginx (`Docker`)
 - `web-сервис`, `nginx`, `PostgresSQL` и `RabbitMQ` запущены в `Docker` контейнерах
 
+![Project_architecture.png](README_static%2FProject_architecture.png)
+
+
 ## Cтек технологий:
 - Языки: `Python`, `HTML`, `CSS`
 - Инструменты разработки и организации инфраструктуры: `Git`, `Github`, `GitLab`, `Docker`, `Docker Hub`, `Bash`, `PyCharm`
