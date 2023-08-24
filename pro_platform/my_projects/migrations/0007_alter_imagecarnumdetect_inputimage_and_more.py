@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='imagecarnumdetect',
             name='InputImage',
-            field=models.ImageField(upload_to='images/', validators=[my_projects.validators.validate_file_size]),
+            field=models.ImageField(upload_to='images/', validators=[my_projects.validators.validate_max_image_size]),
         ),
         migrations.AlterField(
             model_name='imagesexagedetect',
             name='InputImage',
-            field=models.ImageField(upload_to='images/', validators=[my_projects.validators.validate_file_size]),
+            field=models.ImageField(upload_to='images/', validators=[my_projects.validators.validate_max_image_size]),
         ),
     ]

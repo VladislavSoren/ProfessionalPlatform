@@ -14,6 +14,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='videoexerciserec',
             name='InputVideo',
-            field=models.FileField(null=True, upload_to='videos/', validators=[my_projects.validators.validate_file_size, my_projects.validators.validate_min_number_of_frames], verbose_name=''),
+            field=models.FileField(null=True, upload_to='videos/',
+                                   validators=[
+                                        my_projects.validators.validate_max_video_size,
+                                        my_projects.validators.validate_min_number_of_frames
+                                   ], verbose_name=''),
         ),
     ]
