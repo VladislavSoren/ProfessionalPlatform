@@ -24,10 +24,7 @@
 ## Проектная реализация:
 - WSGI-сервер: gunicorn
 - HTTP-сервер: nginx (`Docker`)
-- `БД` запущена в `Docker` контейнере
-- `Celery` запущен в `Docker` контейнере
-- `RabbitMQ` запущен в `Docker` контейнере
-- `MailCatcher` запущен в `Docker` контейнере
+- `web-сервис`, `nginx`, `PostgresSQL` и `RabbitMQ` запущены в `Docker` контейнерах
 
 ## Cтек технологий:
 - Языки: `Python`, `HTML`, `CSS`
