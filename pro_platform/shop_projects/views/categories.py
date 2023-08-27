@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin, LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -6,7 +7,7 @@ from shop_projects.forms import CategoryForm
 from shop_projects.models import Category
 
 
-class CategoriesListView(ListView):
+class CategoriesListView(LoginRequiredMixin, ListView):
     queryset = (
         Category
         .objects
@@ -22,7 +23,7 @@ class CategoriesListView(ListView):
     }
 
 
-class CategoryDetailView(DetailView):
+class CategoryDetailView(LoginRequiredMixin, DetailView):
     queryset = (
         Category
         .objects
@@ -39,7 +40,11 @@ class CategoryDetailView(DetailView):
     }
 
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+    def test_func(self):
+        return self.request.user.is_staff
+
     model = Category
     form_class = CategoryForm
     success_url = reverse_lazy("shop_projects:categories")
@@ -50,7 +55,9 @@ class CategoryCreateView(CreateView):
     }
 
 
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = "shop_projects.update_category"
+
     template_name_suffix = "_update_form"
     model = Category
     form_class = CategoryForm
@@ -69,7 +76,9 @@ class CategoryUpdateView(UpdateView):
         )
 
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = "shop_projects.delete_category"
+
     success_url = reverse_lazy("shop_projects:categories")
     queryset = (
         Category

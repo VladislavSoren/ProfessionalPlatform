@@ -2,6 +2,7 @@ import base64
 import io
 import os
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
@@ -40,6 +41,7 @@ def save_tagged_image(image_bytes, path_tagged_image: str):
     image.save(path_tagged_image)
 
 
+@login_required
 def image_request(request):
     if request.method == 'POST':
         form = ImageSexAgeDetectForm(request.POST, request.FILES)

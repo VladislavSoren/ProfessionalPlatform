@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
     UserPassesTestMixin,
 )
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -61,8 +62,19 @@ class DonatCreateView(LoginRequiredMixin, CreateView):
         "class_name_plural": Donat._meta.verbose_name_plural,
     }
 
+    def form_valid(self, form):
 
-class DonatUpdateView(LoginRequiredMixin, UpdateView):
+        try:
+            form.instance.user = self.request.user
+        except ObjectDoesNotExist:
+            return super().form_invalid(form)
+        else:
+            return super().form_valid(form)
+
+
+class DonatUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = "shop_projects.update_donat"
+
     template_name_suffix = "_update_form"
     model = Donat
     form_class = DonatForm
@@ -81,7 +93,7 @@ class DonatUpdateView(LoginRequiredMixin, UpdateView):
         )
 
 
-class DonatDeleteView(PermissionRequiredMixin, DeleteView):
+class DonatDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = "shop_projects.delete_donat"
 
     success_url = reverse_lazy("shop_projects:donats")

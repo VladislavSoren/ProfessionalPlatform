@@ -24,7 +24,6 @@ class ProjectForm(BaseForm):
             "description",
             "category",
             "status",
-            "creator",
             "url",
             "other_contributors",
         )
@@ -49,7 +48,6 @@ class CreatorForm(BaseForm):
     class Meta:
         model = Creator
         fields = (
-            "user",
             "rating",
         )
 
@@ -61,7 +59,6 @@ class DonatForm(BaseForm):
     class Meta:
         model = Donat
         fields = (
-            "user",
             "projects",
             "money",
         )
@@ -74,7 +71,6 @@ class OrderForm(BaseForm):
     class Meta:
         model = Order
         fields = (
-            "user",
             "projects",
             "promocode",
         )

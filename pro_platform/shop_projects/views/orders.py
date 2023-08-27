@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import (
     user_passes_test,
 )
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
@@ -102,8 +103,19 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         "class_name_plural": Order._meta.verbose_name_plural,
     }
 
+    def form_valid(self, form):
 
-class OrderUpdateView(LoginRequiredMixin, UpdateView):
+        try:
+            form.instance.user = self.request.user
+        except ObjectDoesNotExist:
+            return super().form_invalid(form)
+        else:
+            return super().form_valid(form)
+
+
+class OrderUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = "shop_projects.update_order"
+
     template_name_suffix = "_update_form"
     model = Order
     form_class = OrderForm
@@ -122,7 +134,7 @@ class OrderUpdateView(LoginRequiredMixin, UpdateView):
         )
 
 
-class OrderDeleteView(PermissionRequiredMixin, DeleteView):
+class OrderDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = "shop_projects.delete_order"
 
     success_url = reverse_lazy("shop_projects:orders")

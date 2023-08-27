@@ -1,12 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from shop_projects.forms import CreatorForm
 from shop_projects.models import Creator
+from shop_projects.views.checking_relations import user_is_creator, creator_belongs_user
 
 
-class CreatorsListView(ListView):
+class CreatorsListView(LoginRequiredMixin, ListView):
     queryset = (
         Creator
         .objects
@@ -16,14 +18,18 @@ class CreatorsListView(ListView):
         .all()
     )
 
-    extra_context = {
-        "categories": queryset,
-        "class_name": Creator._meta.object_name.lower(),
-        "class_name_plural": Creator._meta.verbose_name_plural,
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["categories"] = self.queryset
+        context["class_name"] = Creator._meta.object_name.lower()
+        context["class_name_plural"] = Creator._meta.verbose_name_plural
+        context["is_creator"] = user_is_creator(self)
+
+        return context
 
 
-class CreatorDetailView(DetailView):
+class CreatorDetailView(LoginRequiredMixin, DetailView):
     queryset = (
         Creator
         .objects
@@ -41,7 +47,12 @@ class CreatorDetailView(DetailView):
     }
 
 
-class CreatorCreateView(CreateView):
+class CreatorCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+
+    # access in user in NOT creator
+    def test_func(self):
+        return not user_is_creator(self)
+
     model = Creator
     form_class = CreatorForm
     success_url = reverse_lazy("shop_projects:creators")
@@ -51,8 +62,17 @@ class CreatorCreateView(CreateView):
         "class_name_plural": Creator._meta.verbose_name_plural,
     }
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
 
-class CreatorUpdateView(UpdateView):
+        return super().form_valid(form)
+
+
+class CreatorUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    def test_func(self):
+        return user_is_creator(self) and creator_belongs_user(self)
+
     template_name_suffix = "_update_form"
     model = Creator
     form_class = CreatorForm
@@ -71,7 +91,9 @@ class CreatorUpdateView(UpdateView):
         )
 
 
-class CreatorDeleteView(DeleteView):
+class CreatorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = "shop_projects.delete_creator"
+
     success_url = reverse_lazy("shop_projects:creators")
     queryset = (
         Creator

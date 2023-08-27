@@ -16,10 +16,15 @@
         </ul>
     </div>
 
-
-    <a class="btn btn-primary my-2"
-       href="{% url 'shop_projects:create-project' %}">
-       Create new {{ class_name }}</a>
+    {% if is_creator %}
+        <a class="btn btn-primary my-2"
+           href="{% url 'shop_projects:create-project' %}">
+           Create new {{ class_name }}</a>
+    {% else %}
+        <a class="btn btn-primary my-2"
+           href="{% url 'shop_projects:create-creator' %}">
+           Become a creator!</a>
+    {% endif %}
 
     <div>
         {% include 'macros/back_to_index.html' %}
