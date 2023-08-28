@@ -3,21 +3,21 @@ import sys
 from django.test import TestCase
 from django.urls import reverse
 
+from common_test_cases_global import CreateTestUser, login_test_user
 from pro_platform.fake import fake
 
 from shop_projects.models import Creator
-
-from django import db
 
 from shop_projects.tests.common_test_cases import checking_refs_details_page, checking_refs_list_page, \
     checking_content_list_page
 
 
-class TestCreatorTestCase(TestCase):
+class TestCreatorTestCase(CreateTestUser, TestCase):
 
     # fill test db
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
 
         from shop_projects.factories.creator import CreatorFactory
 
@@ -43,6 +43,7 @@ class TestCreatorTestCase(TestCase):
         for project in cls.projects:
             project.delete()
         cls.creator.delete()
+        super().tearDownClass()
 
     # checking creation of object
     def test_get_creator(self):
@@ -54,7 +55,8 @@ class TestCreatorTestCase(TestCase):
 
     # checking displaying of object
     def test_get_creator_details(self):
-        # url = reverse("shop_projects:creator-details", kwargs={"pk": self.creator.pk})
+        _ = login_test_user(self)
+
         url = reverse("shop_projects:creator-details", kwargs={"pk": self.creator.pk})
         response = self.client.get(url)
 
@@ -86,7 +88,7 @@ class TestCreatorTestCase(TestCase):
         checking_refs_details_page(self, response, 'creators', self.creator.pk)
 
 
-class ProjectsListViewTestCase(TestCase):
+class CreatorsListViewTestCase(CreateTestUser, TestCase):
     # instead of factory we use fixtures (take a lot of time)
     fixtures = [
         "users.json",
@@ -97,6 +99,8 @@ class ProjectsListViewTestCase(TestCase):
     ]
 
     def test_get_projects_list(self):
+        _ = login_test_user(self)
+
         url = reverse("shop_projects:creators")
         response = self.client.get(url)
 

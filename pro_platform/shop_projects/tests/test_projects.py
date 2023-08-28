@@ -1,16 +1,19 @@
 from django.test import TestCase
 from django.urls import reverse
 
+from common_test_cases_global import CreateTestUser, login_test_user, CreateTestCreator
 from shop_projects.models import Project
 from shop_projects.tests.common_test_cases import checking_refs_details_page, checking_refs_list_page, \
     checking_content_list_page
 
 
-class TestProjectTestCase(TestCase):
+class TestProjectTestCase(CreateTestUser, TestCase):
 
     # creation of object
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
+
         # import ProjectFactory from separate module to avoid using prod db during module initialization
         from shop_projects.factories.project import ProjectFactoryWithSubFactory
 
@@ -21,6 +24,7 @@ class TestProjectTestCase(TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.project.delete()
+        super().tearDownClass()
 
     # checking creation of object
     def test_get_project(self):
@@ -32,6 +36,8 @@ class TestProjectTestCase(TestCase):
 
     # checking displaying of object
     def test_get_project_details(self):
+        _ = login_test_user(self)
+
         url = reverse("shop_projects:project-details", kwargs={"pk": self.project.pk})
         response = self.client.get(url)
 
@@ -52,7 +58,7 @@ class TestProjectTestCase(TestCase):
         checking_refs_details_page(self, response, 'projects', self.project.pk)
 
 
-class ProjectsListViewTestCase(TestCase):
+class ProjectsListViewTestCase(CreateTestCreator, TestCase):
     # instead of factory we use fixtures (take a lot of time)
     fixtures = [
         "users.json",
@@ -63,6 +69,8 @@ class ProjectsListViewTestCase(TestCase):
     ]
 
     def test_get_projects_list(self):
+        _ = login_test_user(self)
+
         url = reverse("shop_projects:projects")
         response = self.client.get(url)
 

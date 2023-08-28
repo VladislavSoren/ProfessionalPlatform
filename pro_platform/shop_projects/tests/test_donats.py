@@ -11,8 +11,6 @@ from pro_platform.fake import fake
 
 from shop_projects.models import Donat
 
-from django import db
-
 from shop_projects.tests.common_test_cases import checking_refs_list_page, checking_content_list_page
 
 UserModel: Type[AbstractUser] = get_user_model()
@@ -50,6 +48,7 @@ class DonatListViewTestCase(TestCase):
             donat.delete()
         for project in cls.projects:
             project.delete()
+        cls.user.delete()
 
     def test_anon_user_no_access(self):
         # try to follow the link

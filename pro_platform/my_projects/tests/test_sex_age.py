@@ -3,15 +3,18 @@ import os
 from django.test import TestCase
 from django.urls import reverse
 
+from common_test_cases_global import CreateTestUser, login_test_user
 from config import CONFIG_OBJECT
 from my_projects.forms import ImageSexAgeDetectForm
 from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing, about_page_check_content, \
     about_page_check_refs
 
 
-class SexAgeTryPageTestCase(TestCase):
+class SexAgeTryPageTestCase(CreateTestUser, TestCase):
 
     def test_form(self):
+        _ = login_test_user(self)
+
         try_page_path = "my_projects:sex_age_detection"
         try_template_path = "my_projects/sex_age_det_try.html"
         form = ImageSexAgeDetectForm()
@@ -19,11 +22,13 @@ class SexAgeTryPageTestCase(TestCase):
         try_page_form_testing(self, try_page_path, try_template_path, form)
 
 
-class SexAgeApiTestCase(TestCase):
+class SexAgeApiTestCase(CreateTestUser, TestCase):
     SKIP_API_TESTS = int(os.getenv("SKIP_API_TESTS", False))  # from .env returns str value
     SKIP_API_TESTS_ACTIONS = int(os.getenv("SKIP_API_TESTS_ACTIONS", False))
 
     def test_api(self):
+        _ = login_test_user(self)
+
         if self.SKIP_API_TESTS or self.SKIP_API_TESTS_ACTIONS:
             self.skipTest("skip api tests in actions due to missing of services")
         try_page_api_testing(

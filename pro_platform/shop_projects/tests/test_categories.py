@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.test import TestCase
 from django.urls import reverse
 
+from common_test_cases_global import CreateTestUser, login_test_user, CreateTestCreator
 from pro_platform.fake import fake
 
 from shop_projects.models import Category
@@ -11,11 +12,13 @@ from shop_projects.tests.common_test_cases import checking_refs_details_page, ch
     checking_content_list_page
 
 
-class TestCategoryTestCase(TestCase):
+class TestCategoryTestCase(CreateTestUser, TestCase):
 
     # creation of object
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
+
         from shop_projects.factories.category import CategoryFactory
         from shop_projects.factories.creator import CreatorFactory
 
@@ -40,6 +43,7 @@ class TestCategoryTestCase(TestCase):
         for creator in cls.creators:
             creator.delete()
         cls.category.delete()
+        super().tearDownClass()
 
     # checking creation of object
     def test_get_category(self):
@@ -52,6 +56,8 @@ class TestCategoryTestCase(TestCase):
 
     # checking displaying of object
     def test_get_category_details(self):
+        _ = login_test_user(self)
+
         url = reverse("shop_projects:category-details", kwargs={"pk": self.category.pk})
         response = self.client.get(url)
 
@@ -82,11 +88,13 @@ class TestCategoryTestCase(TestCase):
         checking_refs_details_page(self, response, 'categories', self.category.pk)
 
 
-class TestCategoriesListTestCase(TestCase):
+class TestCategoriesListTestCase(CreateTestUser, TestCase):
 
     # creation of objects
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
+
         from shop_projects.factories.category import CategoryFactory
 
         cls.nb_categories = fake.pyint(min_value=2, max_value=7)
@@ -97,6 +105,7 @@ class TestCategoriesListTestCase(TestCase):
     def tearDownClass(cls):
         for category in cls.categories:
             category.delete()
+        super().tearDownClass()
 
     # checking creation of objects
     def test_get_categories(self):
@@ -107,6 +116,8 @@ class TestCategoriesListTestCase(TestCase):
 
     # checking displaying of objects
     def test_get_category_list(self):
+        _ = login_test_user(self)
+
         url = reverse("shop_projects:categories")
         response = self.client.get(url)
 

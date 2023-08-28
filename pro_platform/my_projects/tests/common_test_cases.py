@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from django.template.response import TemplateResponse
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 
 from my_projects.config import file_description_list_koncert_bot
 from my_projects.views.support_funcs import get_template_names_dict, get_template_names_koncert_bot_dict

@@ -3,15 +3,18 @@ import os
 from django.test import TestCase
 from django.urls import reverse
 
+from common_test_cases_global import CreateTestUser, login_test_user
 from config import CONFIG_OBJECT
 from my_projects.forms import VideoExerciseRecForm
 from my_projects.tests.common_test_cases import try_page_form_testing, try_page_api_testing, about_page_check_content, \
     about_page_check_refs
 
 
-class ExRecTryPageTestCase(TestCase):
+class ExRecTryPageTestCase(CreateTestUser, TestCase):
 
     def test_form(self):
+        _ = login_test_user(self)
+
         try_page_path = "my_projects:exercise_recognition"
         try_template_path = "my_projects/exercise_rec_try.html"
         form = VideoExerciseRecForm()
@@ -19,11 +22,13 @@ class ExRecTryPageTestCase(TestCase):
         try_page_form_testing(self, try_page_path, try_template_path, form)
 
 
-class ExRecApiTestCase(TestCase):
+class ExRecApiTestCase(CreateTestUser, TestCase):
     SKIP_API_TESTS = int(os.getenv("SKIP_API_TESTS", False))  # from .env returns str value
     SKIP_API_TESTS_ACTIONS = int(os.getenv("SKIP_API_TESTS_ACTIONS", False))
 
     def test_api(self):
+        _ = login_test_user(self)
+
         if self.SKIP_API_TESTS or self.SKIP_API_TESTS_ACTIONS:
             self.skipTest("skip api tests in actions due to missing of services")
 
